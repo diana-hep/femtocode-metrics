@@ -1,0 +1,55 @@
+Mu_Run2010B-Apr21ReReco-v1_AOD.root
+number of TBaskets 41
+688.906 ns/item
+320.936 ns/item
+1796.14 ns/item
+247.927 ns/item
+269.145 ns/item
+246.458 ns/item
+238.634 ns/item
+193.092 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy2.root
+number of TBaskets 41
+636.489 ns/item
+244.687 ns/item
+265.210 ns/item
+244.471 ns/item
+593.997 ns/item
+247.644 ns/item
+245.790 ns/item
+247.591 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy3.root
+number of TBaskets 41
+348.744 ns/item
+183.472 ns/item
+183.461 ns/item
+181.422 ns/item
+194.688 ns/item
+175.473 ns/item
+185.986 ns/item
+176.463 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy4.root
+number of TBaskets 41
+499.383 ns/item
+341.218 ns/item
+346.253 ns/item
+354.199 ns/item
+236.469 ns/item
+127.569 ns/item
+127.590 ns/item
+129.381 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy5.root
+number of TBaskets 41
+413.388 ns/item
+179.847 ns/item
+185.854 ns/item
+177.821 ns/item
+192.151 ns/item
+168.369 ns/item
+128.449 ns/item
+134.405 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)

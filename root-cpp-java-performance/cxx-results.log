@@ -1,0 +1,57 @@
+
+Processing readOneBranch.cxx+...
+Mu_Run2010B-Apr21ReReco-v1_AOD.root
+number of TBaskets ???
+69.49 ns/item
+51.83 ns/item
+50.64 ns/item
+51.85 ns/item
+64.4 ns/item
+51.42 ns/item
+51.86 ns/item
+52.54 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy2.root
+number of TBaskets ???
+65.28 ns/item
+53.48 ns/item
+50.44 ns/item
+51.34 ns/item
+63.25 ns/item
+51.3 ns/item
+51.23 ns/item
+51.99 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy3.root
+number of TBaskets ???
+64.75 ns/item
+52.26 ns/item
+50.96 ns/item
+51.65 ns/item
+62.68 ns/item
+50.87 ns/item
+51.31 ns/item
+52.11 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy4.root
+number of TBaskets ???
+64.82 ns/item
+52.15 ns/item
+50.94 ns/item
+51.4 ns/item
+61.88 ns/item
+51.55 ns/item
+51.54 ns/item
+52.24 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)
+copy5.root
+number of TBaskets ???
+64.8 ns/item
+52.09 ns/item
+51.96 ns/item
+53.35 ns/item
+62.77 ns/item
+50.85 ns/item
+51.09 ns/item
+52.15 ns/item
+check total 1.55104e+07 == 1.55104e+07 (true)

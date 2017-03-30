@@ -1,0 +1,167 @@
+[pivarski@mcmillan-r1k1 ~]$ for x in 256 128 64 32 16 8 4 2 1; do python coordinated.py numa_alloc_local $x; done
+256 processes, total of 33554432 operations in 0.037593841552734375 sec = 892.5512960129882 MHz 10.3785
+128 processes, total of 16777216 operations in 0.01123499870300293 sec = 1493.2993268184114 MHz 17.3639
+64 processes, total of 8388608 operations in 0.004146575927734375 sec = 2023.0204742888684 MHz 23.5235
+32 processes, total of 4194304 operations in 0.0023555755615234375 sec = 1780.5856320259109 MHz 20.7045
+16 processes, total of 2097152 operations in 0.0023076534271240234 sec = 908.7811780357474 MHz 10.5672
+8 processes, total of 1048576 operations in 0.0015249252319335938 sec = 687.624532692933 MHz 7.99563
+4 processes, total of 524288 operations in 0.0015115737915039062 sec = 346.8490939356467 MHz 4.03313
+2 processes, total of 262144 operations in 0.001489400863647461 sec = 176.00634348903472 MHz 2.04659
+1 processes, total of 131072 operations in 0.001523733139038086 sec = 86.02031198372711 MHz 1.00024
+
+[pivarski@mcmillan-r1k1 ~]$ for x in 256 128 64 32 16 8 4 2 1; do python coordinated.py numa_alloc_local $x; done
+256 processes, total of 33554432 operations in 0.04127383232116699 sec = 812.9710790822747 MHz 9.13451
+128 processes, total of 16777216 operations in 0.01368570327758789 sec = 1225.8935956528344 MHz 13.7741
+64 processes, total of 8388608 operations in 0.005789756774902344 sec = 1448.870535695602 MHz 16.2794
+32 processes, total of 4194304 operations in 0.0030488967895507812 sec = 1375.6792340018767 MHz 15.4571
+16 processes, total of 2097152 operations in 0.002178192138671875 sec = 962.7947703817863 MHz 10.8179
+8 processes, total of 1048576 operations in 0.0020847320556640625 sec = 502.9787867227813 MHz 5.65145
+4 processes, total of 524288 operations in 0.001664876937866211 sec = 314.91096313217815 MHz 3.53833
+2 processes, total of 262144 operations in 0.0015101432800292969 sec = 173.58882661446162 MHz 1.95044
+1 processes, total of 131072 operations in 0.0014629364013671875 sec = 89.59514567926988 MHz 1.00669
+
+[pivarski@mcmillan-r1k1 ~]$ for x in 256 128 64 32 16 8 4 2 1; do python coordinated.py numa_alloc_local $x; done
+256 processes, total of 33554432 operations in 0.03525137901306152 sec = 951.8615424255385 MHz 10.8166
+128 processes, total of 16777216 operations in 0.010994195938110352 sec = 1526.0066397255437 MHz 17.341
+64 processes, total of 8388608 operations in 0.005608320236206055 sec = 1495.7434038529098 MHz 16.9971
+32 processes, total of 4194304 operations in 0.0023512840270996094 sec = 1783.8355348221455 MHz 20.2709
+16 processes, total of 2097152 operations in 0.0021750926971435547 sec = 964.1667239074866 MHz 10.9564
+8 processes, total of 1048576 operations in 0.001825571060180664 sec = 574.3824619438423 MHz 6.52707
+4 processes, total of 524288 operations in 0.00151824951171875 sec = 345.32400369849245 MHz 3.92414
+2 processes, total of 262144 operations in 0.0015461444854736328 sec = 169.54689711272167 MHz 1.92667
+1 processes, total of 131072 operations in 0.0014843940734863281 sec = 88.30000223064567 MHz 1.00341
+
+
+
+
+
+
+[pivarski@mcmillan-r1k1 ~]$ for x in 256 128 64 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+256 processes, total of 33554432 operations in 0.08167600631713867 sec = 410.8236128700018 MHz 5.33537
+128 processes, total of 16777216 operations in 0.035288333892822266 sec = 475.4323638785487 MHz 6.17445
+64 processes, total of 8388608 operations in 0.012669801712036133 sec = 662.0946555170584 MHz 8.59863
+32 processes, total of 4194304 operations in 0.005727052688598633 sec = 732.3669307862286 MHz 9.51126
+16 processes, total of 2097152 operations in 0.0027158260345458984 sec = 772.1967362135018 MHz 10.0285
+8 processes, total of 1048576 operations in 0.001959085464477539 sec = 535.2374967876353 MHz 6.95114
+4 processes, total of 524288 operations in 0.0017769336700439453 sec = 295.0520938618006 MHz 3.83185
+2 processes, total of 262144 operations in 0.0022978782653808594 sec = 114.08089103299439 MHz 1.48157
+1 processes, total of 131072 operations in 0.0017044544219970703 sec = 76.89968021933137 MHz 0.998697
+
+[pivarski@mcmillan-r1k1 ~]$ for x in 256 128 64 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+256 processes, total of 33554432 operations in 0.08507633209228516 sec = 394.4038391735363 MHz 5.12213
+128 processes, total of 16777216 operations in 0.035390615463256836 sec = 474.05832818642 MHz 6.1566
+64 processes, total of 8388608 operations in 0.015010833740234375 sec = 558.8369137362134 MHz 7.25762
+32 processes, total of 4194304 operations in 0.0054607391357421875 sec = 768.0835681285365 MHz 9.97511
+16 processes, total of 2097152 operations in 0.0023767948150634766 sec = 882.3445703890059 MHz 11.459
+8 processes, total of 1048576 operations in 0.0025484561920166016 sec = 411.4553757230798 MHz 5.34358
+4 processes, total of 524288 operations in 0.0019483566284179688 sec = 269.09241991581007 MHz 3.49471
+2 processes, total of 262144 operations in 0.001775979995727539 sec = 147.6052661801584 MHz 1.91695
+1 processes, total of 131072 operations in 0.0016963481903076172 sec = 77.26715585214336 MHz 1.00347
+
+[pivarski@mcmillan-r1k1 ~]$ for x in 256 128 64 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+256 processes, total of 33554432 operations in 0.08222007751464844 sec = 408.1050883711694 MHz 5.83007
+128 processes, total of 16777216 operations in 0.03634977340698242 sec = 461.5493970803479 MHz 6.59356
+64 processes, total of 8388608 operations in 0.01296544075012207 sec = 646.9975191488203 MHz 9.24282
+32 processes, total of 4194304 operations in 0.005478620529174805 sec = 765.576658880543 MHz 10.9368
+16 processes, total of 2097152 operations in 0.0029900074005126953 sec = 701.3868927683598 MHz 10.0198
+8 processes, total of 1048576 operations in 0.0030150413513183594 sec = 347.78163143318045 MHz 4.96831
+4 processes, total of 524288 operations in 0.0018138885498046875 sec = 289.0409116130389 MHz 4.12916
+2 processes, total of 262144 operations in 0.0018916130065917969 sec = 138.58225709301738 MHz 1.97975
+1 processes, total of 131072 operations in 0.001857757568359375 sec = 70.5538775523614 MHz 1.00791
+
+
+
+
+
+
+techlab
+
+% for x in 32 16 8 4 2 1; do python coordinated.py numa_alloc_local $x; done
+32 processes, total of 4194304 operations in 0.0017817020416259766 sec = 2354.0995643538067 MHz 18.2488
+16 processes, total of 2097152 operations in 0.002163410186767578 sec = 969.3732667189772 MHz 7.51452
+8 processes, total of 1048576 operations in 0.0013387203216552734 sec = 783.2674107041852 MHz 6.07184
+4 processes, total of 524288 operations in 0.0018439292907714844 sec = 284.33194408482024 MHz 2.20412
+2 processes, total of 262144 operations in 0.0013666152954101562 sec = 191.8198931919051 MHz 1.48698
+1 processes, total of 131072 operations in 0.0010111331939697266 sec = 129.6288172336713 MHz 1.00487
+
+% for x in 32 16 8 4 2 1; do python coordinated.py numa_alloc_local $x; done
+32 processes, total of 4194304 operations in 0.0022592544555664062 sec = 1856.4991604491345 MHz 20.8595
+16 processes, total of 2097152 operations in 0.0013489723205566406 sec = 1554.6293782622834 MHz 17.4677
+8 processes, total of 1048576 operations in 0.0013778209686279297 sec = 761.0393685938743 MHz 8.551
+4 processes, total of 524288 operations in 0.001802206039428711 sec = 290.9145727678264 MHz 3.2687
+2 processes, total of 262144 operations in 0.0009057521820068359 sec = 289.42132871176625 MHz 3.25193
+1 processes, total of 131072 operations in 0.0014729499816894531 sec = 88.98604951246358 MHz 0.999843
+
+% for x in 32 16 8 4 2 1; do python coordinated.py numa_alloc_local $x; done
+32 processes, total of 4194304 operations in 0.0017063617706298828 sec = 2458.039128743328 MHz 28.9181
+16 processes, total of 2097152 operations in 0.0017900466918945312 sec = 1171.562736042621 MHz 13.7831
+8 processes, total of 1048576 operations in 0.0012290477752685547 sec = 853.1613018630455 MHz 10.0372
+4 processes, total of 524288 operations in 0.0013613700866699219 sec = 385.1179081527145 MHz 4.5308
+2 processes, total of 262144 operations in 0.001119375228881836 sec = 234.18778014398296 MHz 2.75515
+1 processes, total of 131072 operations in 0.0015370845794677734 sec = 85.27312143446564 MHz 1.00321
+
+
+
+
+
+% for x in 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+32 processes, total of 4194304 operations in 0.0026352405548095703 sec = 1591.620921416448 MHz 16.7539
+16 processes, total of 2097152 operations in 0.0021829605102539062 sec = 960.6916800139799 MHz 10.1125
+8 processes, total of 1048576 operations in 0.0014340877532958984 sec = 731.1798023448047 MHz 7.69663
+4 processes, total of 524288 operations in 0.0013949871063232422 sec = 375.83716553614767 MHz 3.95618
+2 processes, total of 262144 operations in 0.0012388229370117188 sec = 211.60731866358736 MHz 2.22745
+1 processes, total of 131072 operations in 0.001373291015625 sec = 95.44371768888888 MHz 1.00467
+
+% for x in 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+32 processes, total of 4194304 operations in 0.001790761947631836 sec = 2342.1895945168417 MHz 13.3839
+16 processes, total of 2097152 operations in 0.0017230510711669922 sec = 1217.115403654075 MHz 6.95495
+8 processes, total of 1048576 operations in 0.001367330551147461 sec = 766.8782059466433 MHz 4.38216
+4 processes, total of 524288 operations in 0.0014843940734863281 sec = 353.2000089225827 MHz 2.01829
+2 processes, total of 262144 operations in 0.0007171630859375 sec = 365.52913157446807 MHz 2.08874
+1 processes, total of 131072 operations in 0.0007452964782714844 sec = 175.8655834574536 MHz 1.00495
+
+% for x in 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+32 processes, total of 4194304 operations in 0.002051830291748047 sec = 2044.1768585191726 MHz 14.6013
+16 processes, total of 2097152 operations in 0.002201557159423828 sec = 952.5766755694174 MHz 6.80412
+8 processes, total of 1048576 operations in 0.0014941692352294922 sec = 701.7786039738312 MHz 5.0127
+4 processes, total of 524288 operations in 0.0014224052429199219 sec = 368.5925671391217 MHz 2.6328
+2 processes, total of 262144 operations in 0.0014007091522216797 sec = 187.15091536612766 MHz 1.33679
+1 processes, total of 131072 operations in 0.0009336471557617188 sec = 140.38708219816138 MHz 1.00276
+
+
+
+
+
+
+
+
+
+bd.rc.princeton.edu
+
+[pivarski@bd ~]$ for x in 40 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+40 processes, total of 5242880 operations in 0.001786947250366211 sec = 2933.9869987351567 MHz 15.5237
+32 processes, total of 4194304 operations in 0.0015194416046142578 sec = 2760.424610766672 MHz 14.6054
+16 processes, total of 2097152 operations in 0.001306295394897461 sec = 1605.4194236554115 MHz 8.49428
+8 processes, total of 1048576 operations in 0.0007894039154052734 sec = 1328.3136548184839 MHz 7.02811
+4 processes, total of 524288 operations in 0.0006699562072753906 sec = 782.5705535772241 MHz 4.14058
+2 processes, total of 262144 operations in 0.0006911754608154297 sec = 379.27272431045185 MHz 2.00673
+1 processes, total of 131072 operations in 0.0006937980651855469 sec = 188.91952367285222 MHz 0.999574
+
+[pivarski@bd ~]$ for x in 40 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+40 processes, total of 5242880 operations in 0.0017781257629394531 sec = 2948.542847347814 MHz 13.0466
+32 processes, total of 4194304 operations in 0.0015168190002441406 sec = 2765.1974291757306 MHz 12.2354
+16 processes, total of 2097152 operations in 0.0012938976287841797 sec = 1620.8021047002026 MHz 7.17169
+8 processes, total of 1048576 operations in 0.001041412353515625 sec = 1006.878780014652 MHz 4.45522
+4 processes, total of 524288 operations in 0.0007331371307373047 sec = 715.1295140006504 MHz 3.16429
+2 processes, total of 262144 operations in 0.0006992816925048828 sec = 374.87610902693484 MHz 1.65874
+1 processes, total of 131072 operations in 0.000579833984375 sec = 226.05091031578945 MHz 1.00023
+
+[pivarski@bd ~]$ for x in 40 32 16 8 4 2 1; do python coordinated.py malloc $x; done
+40 processes, total of 5242880 operations in 0.0017731189727783203 sec = 2956.8687045206398 MHz 11.5956
+32 processes, total of 4194304 operations in 0.0014846324920654297 sec = 2825.1463055108397 MHz 11.079
+16 processes, total of 2097152 operations in 0.0013005733489990234 sec = 1612.482680514757 MHz 6.32346
+8 processes, total of 1048576 operations in 0.00079345703125 sec = 1321.5283987692308 MHz 5.18246
+4 processes, total of 524288 operations in 0.0006413459777832031 sec = 817.4807641457248 MHz 3.20581
+2 processes, total of 262144 operations in 0.0006132125854492188 sec = 427.4928568335925 MHz 1.67644
+1 processes, total of 131072 operations in 0.0005140304565429688 sec = 254.98878195176252 MHz 0.999956
+

@@ -1,0 +1,107 @@
+Device at 0:
+    name: Tesla K20m
+    totalGlobalMem: 4.63092 GB
+    sharedMemPerBlock: 48 kB
+    regsPerBlock: 65536
+    warpSize: 32
+    memPitch: 2 GB
+    maxThreadsPerBlock: 1024
+    maxThreadsDim: 1024 1024 64 
+    maxGridSize: 2147483647 65535 65535 
+    totalConstMem: 64 kB
+    version: 3.5
+    clockRate: 705.5 MHz
+    textureAlignment: 512
+    deviceOverlap: true
+    multiProcessorCount: 13
+    kernelExecTimeoutEnabled: true
+    integrated: false
+    canMapHostMemory: true
+    computeMode: cudaComputeModeDefault
+    concurrentKernels: true
+    ECCEnabled: true
+    pciBusID: 4
+    pciDeviceID: 0
+    tccDriver: false
+
+1 GB host -> host: 60 ms
+1 GB host -> host: 40 ms
+1 GB host -> host: 40 ms
+1 GB host -> host: 50 ms
+1 GB host -> host: 40 ms
+check 0.178395 0.399677 0.166599
+1 GB host -> device: 70 ms
+1 GB host -> device: 70 ms
+1 GB host -> device: 60 ms
+1 GB host -> device: 70 ms
+1 GB host -> device: 60 ms
+1 GB device in-place operation: 10 ms
+1 GB device in-place operation: 10 ms
+1 GB device in-place operation: 0 ms
+1 GB device in-place operation: 10 ms
+1 GB device in-place operation: 0 ms
+1 GB device immutable operation: 0 ms
+1 GB device immutable operation: 10 ms
+1 GB device immutable operation: 0 ms
+1 GB device immutable operation: 10 ms
+1 GB device immutable operation: 0 ms
+1 GB device const immutable operation: 10 ms
+1 GB device const immutable operation: 10 ms
+1 GB device const immutable operation: 0 ms
+1 GB device const immutable operation: 10 ms
+1 GB device const immutable operation: 0 ms
+1 GB device -> host: 90 ms
+1 GB device -> host: 90 ms
+1 GB device -> host: 90 ms
+1 GB device -> host: 90 ms
+1 GB device -> host: 100 ms
+check 0.821605 0.600323 0.833401
+1 GB host -> pinned: 40 ms
+1 GB host -> pinned: 40 ms
+1 GB host -> pinned: 40 ms
+1 GB host -> pinned: 40 ms
+1 GB host -> pinned: 40 ms
+1 GB device in-place operation: 60 ms
+1 GB device in-place operation: 50 ms
+1 GB device in-place operation: 70 ms
+1 GB device in-place operation: 50 ms
+1 GB device in-place operation: 50 ms
+1 GB device immutable operation: 50 ms
+1 GB device immutable operation: 50 ms
+1 GB device immutable operation: 50 ms
+1 GB device immutable operation: 50 ms
+1 GB device immutable operation: 50 ms
+1 GB device const immutable operation: 50 ms
+1 GB device const immutable operation: 50 ms
+1 GB device const immutable operation: 50 ms
+1 GB device const immutable operation: 50 ms
+1 GB device const immutable operation: 50 ms
+1 GB pinned -> host: 70 ms
+1 GB pinned -> host: 70 ms
+1 GB pinned -> host: 70 ms
+1 GB pinned -> host: 70 ms
+1 GB pinned -> host: 70 ms
+check 0.178395 0.399677 0.166599
+1 GB device -> device: 10 ms
+1 GB device -> device: 0 ms
+1 GB device -> device: 10 ms
+1 GB device -> device: 0 ms
+1 GB device -> device: 0 ms
+hit atomics on global <<<32768, 32>>>: 20 ms
+hit atomics on global <<<32768, 32>>>: 10 ms
+hit atomics on global <<<32768, 32>>>: 0 ms
+hit atomics on global <<<32768, 32>>>: 0 ms
+hit atomics on global <<<32768, 32>>>: 10 ms
+check for 5242880: 5.24288e+06 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+hit atomics on global <<<32768, 64>>>: 10 ms
+hit atomics on global <<<32768, 64>>>: 10 ms
+hit atomics on global <<<32768, 64>>>: 0 ms
+hit atomics on global <<<32768, 64>>>: 10 ms
+hit atomics on global <<<32768, 64>>>: 20 ms
+check for 10485760: 1.04858e+07 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+hit atomics on global <<<32768, 1024>>>: 140 ms
+hit atomics on global <<<32768, 1024>>>: 140 ms
+hit atomics on global <<<32768, 1024>>>: 140 ms
+hit atomics on global <<<32768, 1024>>>: 150 ms
+hit atomics on global <<<32768, 1024>>>: 140 ms
+check for 33554432

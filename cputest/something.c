@@ -3,11 +3,13 @@
 #include <ctime>
 #include <vector>
 
-#define NUM_POINTS 33554432  //    1 GB of 32-bit floats
+// #define NUM_POINTS 33554432  //    1 GB of 32-bit floats
+
+#define NUM_POINTS 10000000
 
 int main(int argc, char** argv) {
-  float* olddata = new float[NUM_POINTS];
-  float* newdata = new float[NUM_POINTS];
+  double* olddata = new double[NUM_POINTS];
+  double* newdata = new double[NUM_POINTS];
 
   for (int i = 0;  i < NUM_POINTS;  i++)
     olddata[i] = i;

@@ -2,7 +2,8 @@
 #include <string>
 #include <ctime>
 #include <sys/time.h>
-#include <numa.h>
+// #include <numa.h>
+#include <memkind.h>
 
 // #define ITEMS 1000000
 #define ITEMS 100000
@@ -128,71 +129,136 @@ int main(int argc, char** argv) {
   // double* x63 = new double[ITEMS];
   // double* x64 = new double[ITEMS];
 
-  double* x1 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x2 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x3 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x4 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x5 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x6 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x7 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x8 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x9 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x10 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x11 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x12 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x13 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x14 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x15 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x16 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x17 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x18 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x19 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x20 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x21 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x22 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x23 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x24 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x25 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x26 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x27 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x28 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x29 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x30 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x31 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x32 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x33 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x34 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x35 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x36 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x37 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x38 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x39 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x40 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x41 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x42 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x43 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x44 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x45 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x46 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x47 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x48 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x49 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x50 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x51 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x52 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x53 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x54 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x55 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x56 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x57 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x58 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x59 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x60 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x61 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x62 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x63 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  double* x64 = (double*)numa_alloc_local(ITEMS * sizeof(double));
-  
+  double* x1 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x2 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x3 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x4 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x5 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x6 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x7 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x8 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x9 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x10 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x11 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x12 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x13 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x14 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x15 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x16 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x17 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x18 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x19 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x20 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x21 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x22 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x23 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x24 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x25 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x26 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x27 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x28 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x29 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x30 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x31 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x32 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x33 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x34 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x35 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x36 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x37 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x38 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x39 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x40 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x41 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x42 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x43 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x44 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x45 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x46 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x47 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x48 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x49 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x50 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x51 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x52 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x53 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x54 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x55 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x56 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x57 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x58 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x59 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x60 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x61 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x62 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x63 = (double*)hbw_alloc(ITEMS * sizeof(double));
+  double* x64 = (double*)hbw_alloc(ITEMS * sizeof(double));
+
+  std::cout << hbw_verify_memory_region(x1, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x2, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x3, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x4, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x5, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x6, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x7, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x8, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x9, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x10, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x11, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x12, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x13, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x14, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x15, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x16, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x17, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x18, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x19, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x20, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x21, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x22, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x23, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x24, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x25, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x26, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x27, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x28, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x29, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x30, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x31, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x32, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x33, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x34, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x35, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x36, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x37, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x38, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x39, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x40, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x41, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x42, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x43, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x44, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x45, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x46, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x47, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x48, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x49, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x50, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x51, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x52, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x53, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x54, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x55, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x56, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x57, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x58, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x59, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x60, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x61, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x62, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x63, ITEMS * sizeof(double), 0) << " "
+            << hbw_verify_memory_region(x64, ITEMS * sizeof(double), 0) << std::endl
+
   for (int i = 0;  i < ITEMS;  i++) {
     x1[i] = 0.01;
     x2[i] = 0.02;

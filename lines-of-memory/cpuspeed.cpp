@@ -257,7 +257,7 @@ int main(int argc, char** argv) {
             << hbw_verify_memory_region(x61, ITEMS * sizeof(double), 0) << " "
             << hbw_verify_memory_region(x62, ITEMS * sizeof(double), 0) << " "
             << hbw_verify_memory_region(x63, ITEMS * sizeof(double), 0) << " "
-            << hbw_verify_memory_region(x64, ITEMS * sizeof(double), 0) << std::endl
+            << hbw_verify_memory_region(x64, ITEMS * sizeof(double), 0) << std::endl;
 
   for (int i = 0;  i < ITEMS;  i++) {
     x1[i] = 0.01;

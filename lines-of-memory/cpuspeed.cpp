@@ -2,6 +2,7 @@
 #include <string>
 #include <ctime>
 #include <sys/time.h>
+#include <numa.h>
 
 #define ITEMS 1000000
 

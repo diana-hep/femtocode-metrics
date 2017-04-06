@@ -61,6 +61,15 @@ double read64(double* x1, double* x2, double* x3, double* x4, double* x5, double
   return out;
 }
 
+double* tryalloc() {
+  double* out = (double*)hbw_malloc(ITEMS * sizeof(double));
+  while (hbw_verify_memory_region(out, ITEMS * sizeof(double), 0) != 0) {
+    hbw_free(out);
+    out = (double*)hbw_malloc(ITEMS * sizeof(double));
+  }
+  return out;
+}
+
 int main(int argc, char** argv) {
   struct timeval startTime, endTime;
 
@@ -129,70 +138,70 @@ int main(int argc, char** argv) {
   // double* x63 = new double[ITEMS];
   // double* x64 = new double[ITEMS];
 
-  double* x1 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x2 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x3 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x4 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x5 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x6 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x7 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x8 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x9 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x10 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x11 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x12 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x13 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x14 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x15 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x16 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x17 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x18 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x19 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x20 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x21 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x22 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x23 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x24 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x25 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x26 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x27 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x28 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x29 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x30 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x31 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x32 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x33 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x34 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x35 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x36 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x37 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x38 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x39 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x40 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x41 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x42 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x43 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x44 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x45 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x46 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x47 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x48 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x49 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x50 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x51 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x52 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x53 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x54 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x55 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x56 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x57 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x58 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x59 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x60 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x61 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x62 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x63 = (double*)hbw_malloc(ITEMS * sizeof(double));
-  double* x64 = (double*)hbw_malloc(ITEMS * sizeof(double));
+  double* x1 = tryalloc(); std::cout << "x1" << std::endl;
+  double* x2 = tryalloc(); std::cout << "x2" << std::endl;
+  double* x3 = tryalloc(); std::cout << "x3" << std::endl;
+  double* x4 = tryalloc(); std::cout << "x4" << std::endl;
+  double* x5 = tryalloc(); std::cout << "x5" << std::endl;
+  double* x6 = tryalloc(); std::cout << "x6" << std::endl;
+  double* x7 = tryalloc(); std::cout << "x7" << std::endl;
+  double* x8 = tryalloc(); std::cout << "x8" << std::endl;
+  double* x9 = tryalloc(); std::cout << "x9" << std::endl;
+  double* x10 = tryalloc(); std::cout << "x10" << std::endl;
+  double* x11 = tryalloc(); std::cout << "x11" << std::endl;
+  double* x12 = tryalloc(); std::cout << "x12" << std::endl;
+  double* x13 = tryalloc(); std::cout << "x13" << std::endl;
+  double* x14 = tryalloc(); std::cout << "x14" << std::endl;
+  double* x15 = tryalloc(); std::cout << "x15" << std::endl;
+  double* x16 = tryalloc(); std::cout << "x16" << std::endl;
+  double* x17 = tryalloc(); std::cout << "x17" << std::endl;
+  double* x18 = tryalloc(); std::cout << "x18" << std::endl;
+  double* x19 = tryalloc(); std::cout << "x19" << std::endl;
+  double* x20 = tryalloc(); std::cout << "x20" << std::endl;
+  double* x21 = tryalloc(); std::cout << "x21" << std::endl;
+  double* x22 = tryalloc(); std::cout << "x22" << std::endl;
+  double* x23 = tryalloc(); std::cout << "x23" << std::endl;
+  double* x24 = tryalloc(); std::cout << "x24" << std::endl;
+  double* x25 = tryalloc(); std::cout << "x25" << std::endl;
+  double* x26 = tryalloc(); std::cout << "x26" << std::endl;
+  double* x27 = tryalloc(); std::cout << "x27" << std::endl;
+  double* x28 = tryalloc(); std::cout << "x28" << std::endl;
+  double* x29 = tryalloc(); std::cout << "x29" << std::endl;
+  double* x30 = tryalloc(); std::cout << "x30" << std::endl;
+  double* x31 = tryalloc(); std::cout << "x31" << std::endl;
+  double* x32 = tryalloc(); std::cout << "x32" << std::endl;
+  double* x33 = tryalloc(); std::cout << "x33" << std::endl;
+  double* x34 = tryalloc(); std::cout << "x34" << std::endl;
+  double* x35 = tryalloc(); std::cout << "x35" << std::endl;
+  double* x36 = tryalloc(); std::cout << "x36" << std::endl;
+  double* x37 = tryalloc(); std::cout << "x37" << std::endl;
+  double* x38 = tryalloc(); std::cout << "x38" << std::endl;
+  double* x39 = tryalloc(); std::cout << "x39" << std::endl;
+  double* x40 = tryalloc(); std::cout << "x40" << std::endl;
+  double* x41 = tryalloc(); std::cout << "x41" << std::endl;
+  double* x42 = tryalloc(); std::cout << "x42" << std::endl;
+  double* x43 = tryalloc(); std::cout << "x43" << std::endl;
+  double* x44 = tryalloc(); std::cout << "x44" << std::endl;
+  double* x45 = tryalloc(); std::cout << "x45" << std::endl;
+  double* x46 = tryalloc(); std::cout << "x46" << std::endl;
+  double* x47 = tryalloc(); std::cout << "x47" << std::endl;
+  double* x48 = tryalloc(); std::cout << "x48" << std::endl;
+  double* x49 = tryalloc(); std::cout << "x49" << std::endl;
+  double* x50 = tryalloc(); std::cout << "x50" << std::endl;
+  double* x51 = tryalloc(); std::cout << "x51" << std::endl;
+  double* x52 = tryalloc(); std::cout << "x52" << std::endl;
+  double* x53 = tryalloc(); std::cout << "x53" << std::endl;
+  double* x54 = tryalloc(); std::cout << "x54" << std::endl;
+  double* x55 = tryalloc(); std::cout << "x55" << std::endl;
+  double* x56 = tryalloc(); std::cout << "x56" << std::endl;
+  double* x57 = tryalloc(); std::cout << "x57" << std::endl;
+  double* x58 = tryalloc(); std::cout << "x58" << std::endl;
+  double* x59 = tryalloc(); std::cout << "x59" << std::endl;
+  double* x60 = tryalloc(); std::cout << "x60" << std::endl;
+  double* x61 = tryalloc(); std::cout << "x61" << std::endl;
+  double* x62 = tryalloc(); std::cout << "x62" << std::endl;
+  double* x63 = tryalloc(); std::cout << "x63" << std::endl;
+  double* x64 = tryalloc(); std::cout << "x64" << std::endl;
 
   std::cout << hbw_verify_memory_region(x1, ITEMS * sizeof(double), 0) << " "
             << hbw_verify_memory_region(x2, ITEMS * sizeof(double), 0) << " "

@@ -4,7 +4,8 @@
 #include <sys/time.h>
 #include <numa.h>
 
-#define ITEMS 1000000
+// #define ITEMS 1000000
+#define ITEMS 100000
 
 double diff(struct timeval endTime, struct timeval startTime) {
   return (1000L * 1000L * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec)) / 1000.0 / 1000.0;

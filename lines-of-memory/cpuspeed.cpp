@@ -129,7 +129,7 @@ int main(int argc, char** argv) {
   // double* x63 = new double[ITEMS];
   // double* x64 = new double[ITEMS];
 
-  void* pool = hbw_malloc(64 * ITEMS * sizeof(double));
+  char* pool = (char*)hbw_malloc(64 * ITEMS * sizeof(double));
 
   double* x1 = (double*)pool[0 * ITEMS * sizeof(double)];
   double* x2 = (double*)pool[1 * ITEMS * sizeof(double)];

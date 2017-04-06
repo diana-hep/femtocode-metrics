@@ -11,49 +11,49 @@ double diff(struct timeval endTime, struct timeval startTime) {
   return (1000L * 1000L * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec)) / 1000.0 / 1000.0;
 }
 
-double read1(double* x1) {
+inline double read1(double* x1) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i];
   return out;
 }
 
-double read2(double* x1, double* x2) {
+inline double read2(double* x1, double* x2) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i] + x2[i];
   return out;
 }
 
-double read4(double* x1, double* x2, double* x3, double* x4) {
+inline double read4(double* x1, double* x2, double* x3, double* x4) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i] + x2[i] + x3[i] + x4[i];
   return out;
 }
 
-double read8(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8) {
+inline double read8(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i] + x2[i] + x3[i] + x4[i] + x5[i] + x6[i] + x7[i] + x8[i];
   return out;
 }
 
-double read16(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8, double* x9, double* x10, double* x11, double* x12, double* x13, double* x14, double* x15, double* x16) {
+inline double read16(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8, double* x9, double* x10, double* x11, double* x12, double* x13, double* x14, double* x15, double* x16) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i] + x2[i] + x3[i] + x4[i] + x5[i] + x6[i] + x7[i] + x8[i] + x9[i] + x10[i] + x11[i] + x12[i] + x13[i] + x14[i] + x15[i] + x16[i];
   return out;
 }
 
-double read32(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8, double* x9, double* x10, double* x11, double* x12, double* x13, double* x14, double* x15, double* x16, double* x17, double* x18, double* x19, double* x20, double* x21, double* x22, double* x23, double* x24, double* x25, double* x26, double* x27, double* x28, double* x29, double* x30, double* x31, double* x32) {
+inline double read32(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8, double* x9, double* x10, double* x11, double* x12, double* x13, double* x14, double* x15, double* x16, double* x17, double* x18, double* x19, double* x20, double* x21, double* x22, double* x23, double* x24, double* x25, double* x26, double* x27, double* x28, double* x29, double* x30, double* x31, double* x32) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i] + x2[i] + x3[i] + x4[i] + x5[i] + x6[i] + x7[i] + x8[i] + x9[i] + x10[i] + x11[i] + x12[i] + x13[i] + x14[i] + x15[i] + x16[i] + x17[i] + x18[i] + x19[i] + x20[i] + x21[i] + x22[i] + x23[i] + x24[i] + x25[i] + x26[i] + x27[i] + x28[i] + x29[i] + x30[i] + x31[i] + x32[i];
   return out;
 }
 
-double read64(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8, double* x9, double* x10, double* x11, double* x12, double* x13, double* x14, double* x15, double* x16, double* x17, double* x18, double* x19, double* x20, double* x21, double* x22, double* x23, double* x24, double* x25, double* x26, double* x27, double* x28, double* x29, double* x30, double* x31, double* x32, double* x33, double* x34, double* x35, double* x36, double* x37, double* x38, double* x39, double* x40, double* x41, double* x42, double* x43, double* x44, double* x45, double* x46, double* x47, double* x48, double* x49, double* x50, double* x51, double* x52, double* x53, double* x54, double* x55, double* x56, double* x57, double* x58, double* x59, double* x60, double* x61, double* x62, double* x63, double* x64) {
+inline double read64(double* x1, double* x2, double* x3, double* x4, double* x5, double* x6, double* x7, double* x8, double* x9, double* x10, double* x11, double* x12, double* x13, double* x14, double* x15, double* x16, double* x17, double* x18, double* x19, double* x20, double* x21, double* x22, double* x23, double* x24, double* x25, double* x26, double* x27, double* x28, double* x29, double* x30, double* x31, double* x32, double* x33, double* x34, double* x35, double* x36, double* x37, double* x38, double* x39, double* x40, double* x41, double* x42, double* x43, double* x44, double* x45, double* x46, double* x47, double* x48, double* x49, double* x50, double* x51, double* x52, double* x53, double* x54, double* x55, double* x56, double* x57, double* x58, double* x59, double* x60, double* x61, double* x62, double* x63, double* x64) {
   double out = 0.0;
   for (int i = 0;  i < ITEMS;  i++)
     out += x1[i] + x2[i] + x3[i] + x4[i] + x5[i] + x6[i] + x7[i] + x8[i] + x9[i] + x10[i] + x11[i] + x12[i] + x13[i] + x14[i] + x15[i] + x16[i] + x17[i] + x18[i] + x19[i] + x20[i] + x21[i] + x22[i] + x23[i] + x24[i] + x25[i] + x26[i] + x27[i] + x28[i] + x29[i] + x30[i] + x31[i] + x32[i] + x33[i] + x34[i] + x35[i] + x36[i] + x37[i] + x38[i] + x39[i] + x40[i] + x41[i] + x42[i] + x43[i] + x44[i] + x45[i] + x46[i] + x47[i] + x48[i] + x49[i] + x50[i] + x51[i] + x52[i] + x53[i] + x54[i] + x55[i] + x56[i] + x57[i] + x58[i] + x59[i] + x60[i] + x61[i] + x62[i] + x63[i] + x64[i];

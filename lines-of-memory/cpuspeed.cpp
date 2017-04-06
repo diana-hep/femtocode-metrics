@@ -3,7 +3,7 @@
 #include <ctime>
 #include <sys/time.h>
 // #include <numa.h>
-#include <memkind.h>
+#include <hbwmalloc.h>
 
 // #define ITEMS 1000000
 #define ITEMS 100000

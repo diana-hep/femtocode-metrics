@@ -3,10 +3,9 @@
 #include <ctime>
 #include <sys/time.h>
 // #include <numa.h>
-#include <hbwmalloc.h>
+// #include <hbwmalloc.h>
 
-// #define ITEMS 1000000
-#define ITEMS 100000
+#define ITEMS 1000000
 
 double diff(struct timeval endTime, struct timeval startTime) {
   return (1000L * 1000L * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec)) / 1000.0 / 1000.0;
@@ -61,147 +60,147 @@ double read64(double* x1, double* x2, double* x3, double* x4, double* x5, double
   return out;
 }
 
-double* tryalloc() {
-  double* out = (double*)hbw_malloc(ITEMS * sizeof(double));
-  while (hbw_verify_memory_region(out, ITEMS * sizeof(double), 0) != 0) {
-    hbw_free(out);
-    out = (double*)hbw_malloc(ITEMS * sizeof(double));
-  }
-  return out;
-}
+// double* tryalloc() {
+//   double* out = (double*)hbw_malloc(ITEMS * sizeof(double));
+//   while (hbw_verify_memory_region(out, ITEMS * sizeof(double), 0) != 0) {
+//     hbw_free(out);
+//     out = (double*)hbw_malloc(ITEMS * sizeof(double));
+//   }
+//   return out;
+// }
 
 int main(int argc, char** argv) {
   struct timeval startTime, endTime;
 
-  // double* x1 = new double[ITEMS];
-  // double* x2 = new double[ITEMS];
-  // double* x3 = new double[ITEMS];
-  // double* x4 = new double[ITEMS];
-  // double* x5 = new double[ITEMS];
-  // double* x6 = new double[ITEMS];
-  // double* x7 = new double[ITEMS];
-  // double* x8 = new double[ITEMS];
-  // double* x9 = new double[ITEMS];
-  // double* x10 = new double[ITEMS];
-  // double* x11 = new double[ITEMS];
-  // double* x12 = new double[ITEMS];
-  // double* x13 = new double[ITEMS];
-  // double* x14 = new double[ITEMS];
-  // double* x15 = new double[ITEMS];
-  // double* x16 = new double[ITEMS];
-  // double* x17 = new double[ITEMS];
-  // double* x18 = new double[ITEMS];
-  // double* x19 = new double[ITEMS];
-  // double* x20 = new double[ITEMS];
-  // double* x21 = new double[ITEMS];
-  // double* x22 = new double[ITEMS];
-  // double* x23 = new double[ITEMS];
-  // double* x24 = new double[ITEMS];
-  // double* x25 = new double[ITEMS];
-  // double* x26 = new double[ITEMS];
-  // double* x27 = new double[ITEMS];
-  // double* x28 = new double[ITEMS];
-  // double* x29 = new double[ITEMS];
-  // double* x30 = new double[ITEMS];
-  // double* x31 = new double[ITEMS];
-  // double* x32 = new double[ITEMS];
-  // double* x33 = new double[ITEMS];
-  // double* x34 = new double[ITEMS];
-  // double* x35 = new double[ITEMS];
-  // double* x36 = new double[ITEMS];
-  // double* x37 = new double[ITEMS];
-  // double* x38 = new double[ITEMS];
-  // double* x39 = new double[ITEMS];
-  // double* x40 = new double[ITEMS];
-  // double* x41 = new double[ITEMS];
-  // double* x42 = new double[ITEMS];
-  // double* x43 = new double[ITEMS];
-  // double* x44 = new double[ITEMS];
-  // double* x45 = new double[ITEMS];
-  // double* x46 = new double[ITEMS];
-  // double* x47 = new double[ITEMS];
-  // double* x48 = new double[ITEMS];
-  // double* x49 = new double[ITEMS];
-  // double* x50 = new double[ITEMS];
-  // double* x51 = new double[ITEMS];
-  // double* x52 = new double[ITEMS];
-  // double* x53 = new double[ITEMS];
-  // double* x54 = new double[ITEMS];
-  // double* x55 = new double[ITEMS];
-  // double* x56 = new double[ITEMS];
-  // double* x57 = new double[ITEMS];
-  // double* x58 = new double[ITEMS];
-  // double* x59 = new double[ITEMS];
-  // double* x60 = new double[ITEMS];
-  // double* x61 = new double[ITEMS];
-  // double* x62 = new double[ITEMS];
-  // double* x63 = new double[ITEMS];
-  // double* x64 = new double[ITEMS];
+  double* x1 = new double[ITEMS];
+  double* x2 = new double[ITEMS];
+  double* x3 = new double[ITEMS];
+  double* x4 = new double[ITEMS];
+  double* x5 = new double[ITEMS];
+  double* x6 = new double[ITEMS];
+  double* x7 = new double[ITEMS];
+  double* x8 = new double[ITEMS];
+  double* x9 = new double[ITEMS];
+  double* x10 = new double[ITEMS];
+  double* x11 = new double[ITEMS];
+  double* x12 = new double[ITEMS];
+  double* x13 = new double[ITEMS];
+  double* x14 = new double[ITEMS];
+  double* x15 = new double[ITEMS];
+  double* x16 = new double[ITEMS];
+  double* x17 = new double[ITEMS];
+  double* x18 = new double[ITEMS];
+  double* x19 = new double[ITEMS];
+  double* x20 = new double[ITEMS];
+  double* x21 = new double[ITEMS];
+  double* x22 = new double[ITEMS];
+  double* x23 = new double[ITEMS];
+  double* x24 = new double[ITEMS];
+  double* x25 = new double[ITEMS];
+  double* x26 = new double[ITEMS];
+  double* x27 = new double[ITEMS];
+  double* x28 = new double[ITEMS];
+  double* x29 = new double[ITEMS];
+  double* x30 = new double[ITEMS];
+  double* x31 = new double[ITEMS];
+  double* x32 = new double[ITEMS];
+  double* x33 = new double[ITEMS];
+  double* x34 = new double[ITEMS];
+  double* x35 = new double[ITEMS];
+  double* x36 = new double[ITEMS];
+  double* x37 = new double[ITEMS];
+  double* x38 = new double[ITEMS];
+  double* x39 = new double[ITEMS];
+  double* x40 = new double[ITEMS];
+  double* x41 = new double[ITEMS];
+  double* x42 = new double[ITEMS];
+  double* x43 = new double[ITEMS];
+  double* x44 = new double[ITEMS];
+  double* x45 = new double[ITEMS];
+  double* x46 = new double[ITEMS];
+  double* x47 = new double[ITEMS];
+  double* x48 = new double[ITEMS];
+  double* x49 = new double[ITEMS];
+  double* x50 = new double[ITEMS];
+  double* x51 = new double[ITEMS];
+  double* x52 = new double[ITEMS];
+  double* x53 = new double[ITEMS];
+  double* x54 = new double[ITEMS];
+  double* x55 = new double[ITEMS];
+  double* x56 = new double[ITEMS];
+  double* x57 = new double[ITEMS];
+  double* x58 = new double[ITEMS];
+  double* x59 = new double[ITEMS];
+  double* x60 = new double[ITEMS];
+  double* x61 = new double[ITEMS];
+  double* x62 = new double[ITEMS];
+  double* x63 = new double[ITEMS];
+  double* x64 = new double[ITEMS];
 
-  double* x1 = tryalloc(); std::cout << "x1" << std::endl;
-  double* x2 = tryalloc(); std::cout << "x2" << std::endl;
-  double* x3 = tryalloc(); std::cout << "x3" << std::endl;
-  double* x4 = tryalloc(); std::cout << "x4" << std::endl;
-  double* x5 = tryalloc(); std::cout << "x5" << std::endl;
-  double* x6 = tryalloc(); std::cout << "x6" << std::endl;
-  double* x7 = tryalloc(); std::cout << "x7" << std::endl;
-  double* x8 = tryalloc(); std::cout << "x8" << std::endl;
-  double* x9 = tryalloc(); std::cout << "x9" << std::endl;
-  double* x10 = tryalloc(); std::cout << "x10" << std::endl;
-  double* x11 = tryalloc(); std::cout << "x11" << std::endl;
-  double* x12 = tryalloc(); std::cout << "x12" << std::endl;
-  double* x13 = tryalloc(); std::cout << "x13" << std::endl;
-  double* x14 = tryalloc(); std::cout << "x14" << std::endl;
-  double* x15 = tryalloc(); std::cout << "x15" << std::endl;
-  double* x16 = tryalloc(); std::cout << "x16" << std::endl;
-  double* x17 = tryalloc(); std::cout << "x17" << std::endl;
-  double* x18 = tryalloc(); std::cout << "x18" << std::endl;
-  double* x19 = tryalloc(); std::cout << "x19" << std::endl;
-  double* x20 = tryalloc(); std::cout << "x20" << std::endl;
-  double* x21 = tryalloc(); std::cout << "x21" << std::endl;
-  double* x22 = tryalloc(); std::cout << "x22" << std::endl;
-  double* x23 = tryalloc(); std::cout << "x23" << std::endl;
-  double* x24 = tryalloc(); std::cout << "x24" << std::endl;
-  double* x25 = tryalloc(); std::cout << "x25" << std::endl;
-  double* x26 = tryalloc(); std::cout << "x26" << std::endl;
-  double* x27 = tryalloc(); std::cout << "x27" << std::endl;
-  double* x28 = tryalloc(); std::cout << "x28" << std::endl;
-  double* x29 = tryalloc(); std::cout << "x29" << std::endl;
-  double* x30 = tryalloc(); std::cout << "x30" << std::endl;
-  double* x31 = tryalloc(); std::cout << "x31" << std::endl;
-  double* x32 = tryalloc(); std::cout << "x32" << std::endl;
-  double* x33 = tryalloc(); std::cout << "x33" << std::endl;
-  double* x34 = tryalloc(); std::cout << "x34" << std::endl;
-  double* x35 = tryalloc(); std::cout << "x35" << std::endl;
-  double* x36 = tryalloc(); std::cout << "x36" << std::endl;
-  double* x37 = tryalloc(); std::cout << "x37" << std::endl;
-  double* x38 = tryalloc(); std::cout << "x38" << std::endl;
-  double* x39 = tryalloc(); std::cout << "x39" << std::endl;
-  double* x40 = tryalloc(); std::cout << "x40" << std::endl;
-  double* x41 = tryalloc(); std::cout << "x41" << std::endl;
-  double* x42 = tryalloc(); std::cout << "x42" << std::endl;
-  double* x43 = tryalloc(); std::cout << "x43" << std::endl;
-  double* x44 = tryalloc(); std::cout << "x44" << std::endl;
-  double* x45 = tryalloc(); std::cout << "x45" << std::endl;
-  double* x46 = tryalloc(); std::cout << "x46" << std::endl;
-  double* x47 = tryalloc(); std::cout << "x47" << std::endl;
-  double* x48 = tryalloc(); std::cout << "x48" << std::endl;
-  double* x49 = tryalloc(); std::cout << "x49" << std::endl;
-  double* x50 = tryalloc(); std::cout << "x50" << std::endl;
-  double* x51 = tryalloc(); std::cout << "x51" << std::endl;
-  double* x52 = tryalloc(); std::cout << "x52" << std::endl;
-  double* x53 = tryalloc(); std::cout << "x53" << std::endl;
-  double* x54 = tryalloc(); std::cout << "x54" << std::endl;
-  double* x55 = tryalloc(); std::cout << "x55" << std::endl;
-  double* x56 = tryalloc(); std::cout << "x56" << std::endl;
-  double* x57 = tryalloc(); std::cout << "x57" << std::endl;
-  double* x58 = tryalloc(); std::cout << "x58" << std::endl;
-  double* x59 = tryalloc(); std::cout << "x59" << std::endl;
-  double* x60 = tryalloc(); std::cout << "x60" << std::endl;
-  double* x61 = tryalloc(); std::cout << "x61" << std::endl;
-  double* x62 = tryalloc(); std::cout << "x62" << std::endl;
-  double* x63 = tryalloc(); std::cout << "x63" << std::endl;
-  double* x64 = tryalloc(); std::cout << "x64" << std::endl;
+  // double* x1 = tryalloc(); std::cout << "x1" << std::endl;
+  // double* x2 = tryalloc(); std::cout << "x2" << std::endl;
+  // double* x3 = tryalloc(); std::cout << "x3" << std::endl;
+  // double* x4 = tryalloc(); std::cout << "x4" << std::endl;
+  // double* x5 = tryalloc(); std::cout << "x5" << std::endl;
+  // double* x6 = tryalloc(); std::cout << "x6" << std::endl;
+  // double* x7 = tryalloc(); std::cout << "x7" << std::endl;
+  // double* x8 = tryalloc(); std::cout << "x8" << std::endl;
+  // double* x9 = tryalloc(); std::cout << "x9" << std::endl;
+  // double* x10 = tryalloc(); std::cout << "x10" << std::endl;
+  // double* x11 = tryalloc(); std::cout << "x11" << std::endl;
+  // double* x12 = tryalloc(); std::cout << "x12" << std::endl;
+  // double* x13 = tryalloc(); std::cout << "x13" << std::endl;
+  // double* x14 = tryalloc(); std::cout << "x14" << std::endl;
+  // double* x15 = tryalloc(); std::cout << "x15" << std::endl;
+  // double* x16 = tryalloc(); std::cout << "x16" << std::endl;
+  // double* x17 = tryalloc(); std::cout << "x17" << std::endl;
+  // double* x18 = tryalloc(); std::cout << "x18" << std::endl;
+  // double* x19 = tryalloc(); std::cout << "x19" << std::endl;
+  // double* x20 = tryalloc(); std::cout << "x20" << std::endl;
+  // double* x21 = tryalloc(); std::cout << "x21" << std::endl;
+  // double* x22 = tryalloc(); std::cout << "x22" << std::endl;
+  // double* x23 = tryalloc(); std::cout << "x23" << std::endl;
+  // double* x24 = tryalloc(); std::cout << "x24" << std::endl;
+  // double* x25 = tryalloc(); std::cout << "x25" << std::endl;
+  // double* x26 = tryalloc(); std::cout << "x26" << std::endl;
+  // double* x27 = tryalloc(); std::cout << "x27" << std::endl;
+  // double* x28 = tryalloc(); std::cout << "x28" << std::endl;
+  // double* x29 = tryalloc(); std::cout << "x29" << std::endl;
+  // double* x30 = tryalloc(); std::cout << "x30" << std::endl;
+  // double* x31 = tryalloc(); std::cout << "x31" << std::endl;
+  // double* x32 = tryalloc(); std::cout << "x32" << std::endl;
+  // double* x33 = tryalloc(); std::cout << "x33" << std::endl;
+  // double* x34 = tryalloc(); std::cout << "x34" << std::endl;
+  // double* x35 = tryalloc(); std::cout << "x35" << std::endl;
+  // double* x36 = tryalloc(); std::cout << "x36" << std::endl;
+  // double* x37 = tryalloc(); std::cout << "x37" << std::endl;
+  // double* x38 = tryalloc(); std::cout << "x38" << std::endl;
+  // double* x39 = tryalloc(); std::cout << "x39" << std::endl;
+  // double* x40 = tryalloc(); std::cout << "x40" << std::endl;
+  // double* x41 = tryalloc(); std::cout << "x41" << std::endl;
+  // double* x42 = tryalloc(); std::cout << "x42" << std::endl;
+  // double* x43 = tryalloc(); std::cout << "x43" << std::endl;
+  // double* x44 = tryalloc(); std::cout << "x44" << std::endl;
+  // double* x45 = tryalloc(); std::cout << "x45" << std::endl;
+  // double* x46 = tryalloc(); std::cout << "x46" << std::endl;
+  // double* x47 = tryalloc(); std::cout << "x47" << std::endl;
+  // double* x48 = tryalloc(); std::cout << "x48" << std::endl;
+  // double* x49 = tryalloc(); std::cout << "x49" << std::endl;
+  // double* x50 = tryalloc(); std::cout << "x50" << std::endl;
+  // double* x51 = tryalloc(); std::cout << "x51" << std::endl;
+  // double* x52 = tryalloc(); std::cout << "x52" << std::endl;
+  // double* x53 = tryalloc(); std::cout << "x53" << std::endl;
+  // double* x54 = tryalloc(); std::cout << "x54" << std::endl;
+  // double* x55 = tryalloc(); std::cout << "x55" << std::endl;
+  // double* x56 = tryalloc(); std::cout << "x56" << std::endl;
+  // double* x57 = tryalloc(); std::cout << "x57" << std::endl;
+  // double* x58 = tryalloc(); std::cout << "x58" << std::endl;
+  // double* x59 = tryalloc(); std::cout << "x59" << std::endl;
+  // double* x60 = tryalloc(); std::cout << "x60" << std::endl;
+  // double* x61 = tryalloc(); std::cout << "x61" << std::endl;
+  // double* x62 = tryalloc(); std::cout << "x62" << std::endl;
+  // double* x63 = tryalloc(); std::cout << "x63" << std::endl;
+  // double* x64 = tryalloc(); std::cout << "x64" << std::endl;
 
   std::cout << hbw_verify_memory_region(x1, ITEMS * sizeof(double), 0) << " "
             << hbw_verify_memory_region(x2, ITEMS * sizeof(double), 0) << " "

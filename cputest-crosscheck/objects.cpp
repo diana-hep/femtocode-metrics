@@ -31,7 +31,6 @@ int main(int argc, char** argv) {
       size[i]--;
       total--;
     }
-    std::cout << size[i] << std::endl;
   }
 
   double* pt = new double[MUONS];
@@ -39,16 +38,27 @@ int main(int argc, char** argv) {
     pt[i] = i * 1.1;
 
   double idiotproof = 0.0;
+  int pti = 0;
 
-  // gettimeofday(&startTime, 0);
-  // for (int i = 0;  i < ITEMS;  i++) {
-    
+  gettimeofday(&startTime, 0);
+  for (int i = 0;  i < EVENTS;  i++) {
+    std::vector<Muon> muons;
+    for (int j = 0;  j < size[i];  j++) {
+      muons.push_back(Muon(pt[pti]));
+      pti++;
+    }
 
+    for (std::vector<Muon>::const_iterator one = muons.begin();  muon != muons.end();  ++muon) {
+      for (std::vector<Muon>::const_iterator two = muons.begin();  muon != muons.end();  ++muon) {
+        idiotproof = one.pt + two.pt;
+      }
+    }
+  }
+  gettimeofday(&endTime, 0);
 
-  // }
-  // gettimeofday(&endTime, 0);
+  std::cout << idiotproof << std::endl;
 
-  // std::cout << diff(endTime, startTime) << " sec" << std::endl;
+  std::cout << "TIME: " << diff(endTime, startTime) << " sec" << std::endl;
 
   return 0;
 }

@@ -2,6 +2,7 @@
 #include <string>
 #include <ctime>
 #include <sys/time.h>
+#include <vector>
 
 #define EVENTS 48131
 #define MUONS 132274
@@ -19,6 +20,7 @@ public:
 int main(int argc, char** argv) {
   struct timeval startTime, endTime;
 
+  int outsize = 0;
   int total = 0;
   int* size = new int[EVENTS];
   for (int i = 0;  i < EVENTS;  i++) {
@@ -31,32 +33,45 @@ int main(int argc, char** argv) {
       size[i]--;
       total--;
     }
+    outsize += size[i]; // * size[i];
   }
+
+  double* output = new double[outsize];
 
   double* pt = new double[MUONS];
   for (int i = 0;  i < MUONS;  i++)
     pt[i] = i * 1.1;
 
-  double idiotproof = 0.0;
   int pti = 0;
+  int outi = 0;
 
   gettimeofday(&startTime, 0);
   for (int i = 0;  i < EVENTS;  i++) {
-    std::vector<Muon> muons;
+    std::vector<Muon*> muons;
     for (int j = 0;  j < size[i];  j++) {
-      muons.push_back(Muon(pt[pti]));
+      muons.push_back(new Muon(pt[pti]));
       pti++;
     }
 
-    for (std::vector<Muon>::const_iterator one = muons.begin();  muon != muons.end();  ++muon) {
-      for (std::vector<Muon>::const_iterator two = muons.begin();  muon != muons.end();  ++muon) {
-        idiotproof = one.pt + two.pt;
-      }
+    // for (std::vector<Muon*>::const_iterator one = muons.begin();  one != muons.end();  ++one) {
+    //   for (std::vector<Muon*>::const_iterator two = muons.begin();  two != muons.end();  ++two) {
+    //     output[outi] = (*one)->pt + (*two)->pt;
+    //     outi++;
+    //   }
+    // }
+
+    for (std::vector<Muon*>::const_iterator one = muons.begin();  one != muons.end();  ++one) {
+      output[outi] = (*one)->pt * 2;
+      outi++;
+    }
+
+    for (std::vector<Muon*>::const_iterator one = muons.begin();  one != muons.end();  ++one) {
+      delete (*one);
     }
   }
   gettimeofday(&endTime, 0);
 
-  std::cout << idiotproof << std::endl;
+  std::cout << "HERE " << outi << " " << outsize << std::endl;
 
   std::cout << "TIME: " << diff(endTime, startTime) << " sec" << std::endl;
 

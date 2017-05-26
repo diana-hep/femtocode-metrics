@@ -12,6 +12,8 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
     xskip = [False, False]     # a skip for each variable,
     yskip = [False]            # length == depth of the progression
 
+    out = 0.0
+
     while entry < numEntries:
         if deepi != 0:
             countdown[deepi - 1] -= 1
@@ -24,7 +26,7 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
                 countdown[deepi] = xsize[xsizeindex[1]]
                 xsizeindex[1] += 1
             if True:           # check anything below this point
-                outsize[sizeLength] = countdown[deepi]
+                # outsize[sizeLength] = countdown[deepi]
                 sizeLength += 1
 
             if countdown[deepi] == 0:
@@ -41,7 +43,7 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
                 countdown[deepi] = ysize[ysizeindex[1]]
                 ysizeindex[1] += 1
             if not xskip[0]:   # check anything below this point
-                outsize[sizeLength] = countdown[deepi]
+                # outsize[sizeLength] = countdown[deepi]
                 sizeLength += 1
 
             if countdown[deepi] == 0:
@@ -58,7 +60,7 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
                 countdown[deepi] = xsize[xsizeindex[2]]
                 xsizeindex[2] += 1
             if not xskip[0] and not yskip[0]:     # anything below this point
-                outsize[sizeLength] = countdown[deepi]
+                # outsize[sizeLength] = countdown[deepi]
                 sizeLength += 1
 
             if countdown[deepi] == 0:
@@ -72,7 +74,8 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
 
             if not xskip[0] and not xskip[1] and not yskip[0]:
                                # check anything below this point
-                outdata[dataLength] = xdata[xdataindex[2]] * 100 + ydata[ydataindex[1]]
+                # outdata[dataLength] = xdata[xdataindex[2]] * 100 + ydata[ydataindex[1]]
+                out += xdata[xdataindex[2]] * 100 + ydata[ydataindex[1]]
                 dataLength += 1
 
             if not xskip[0] and not xskip[1]:     # x skips below this point
@@ -99,3 +102,5 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
 
         if deepi == 0:
             entry += 1
+
+    return out

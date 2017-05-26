@@ -6,13 +6,15 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
     dataLength = 0
     sizeLength = 0
 
+    out = 0.0
+
     for entry in range(numEntries):
     # entry = 0
     # while entry < numEntries:
         nest0size = xsize[xsizeindex]
         xsizeindex += 1
 
-        outsize[sizeLength] = nest0size
+        # outsize[sizeLength] = nest0size
         sizeLength += 1
 
         if nest0size == 0:
@@ -36,7 +38,7 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
             nest1size = ysize[ysizeindex]
             ysizeindex += 1
 
-            outsize[sizeLength] = nest1size
+            # outsize[sizeLength] = nest1size
             sizeLength += 1
 
             if nest1size == 0:
@@ -60,13 +62,14 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
                 nest2size = xsize[xsizeindex]
                 xsizeindex += 1
 
-                outsize[sizeLength] = nest2size
+                # outsize[sizeLength] = nest2size
                 sizeLength += 1
 
                 for nest2 in range(nest2size):
                 # nest2 = 0
                 # while nest2 < nest2size:
-                    outdata[dataLength] = xdata[xdataindex] * 100 + ydata[ydataindex]
+                    # outdata[dataLength] = xdata[xdataindex] * 100 + ydata[ydataindex]
+                    out += xdata[xdataindex] * 100 + ydata[ydataindex]
                     dataLength += 1
 
                     xdataindex += 1   # at the end of the nest2size loop because it's an xsize
@@ -85,3 +88,4 @@ def runme(xdata, xsize, ydata, ysize, numEntries, outdata, outsize):
     # assert xdataindex == len(xdata)
     # assert ysizeindex == len(ysize)
     # assert ydataindex == len(ydata)
+    return out

@@ -96,6 +96,32 @@ for i in range(multiplier):
     bigydata[i * len(ydata) : (i + 1) * len(ydata)] = ydata
     bigysize[i * len(ysize) : (i + 1) * len(ysize)] = ysize
 
+
+import ctypes
+
+naivelib = ctypes.cdll.LoadLibrary("naive.so")
+naivelib.runnaive.restype = ctypes.c_double
+print naivelib.runnaive(
+    bigxdata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+    bigxsize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+    bigydata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+    bigysize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+    ctypes.c_uint64(2))   # 30 * multiplier
+
+import sys
+sys.exit(0)
+
+
+
+
+
+
+
+
+
+
+
+
 @numba.jitclass([
     ("xdata", numba.float64[:]),
     ("xsize", numba.uint64[:]),
@@ -260,4 +286,3 @@ for i in range(100):
     runnaive(bigxdata, bigxsize, bigydata, bigysize, 30 * multiplier)
     endTime = time.time()
     print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
-

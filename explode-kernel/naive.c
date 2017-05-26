@@ -2,153 +2,140 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-struct XS {
-  double *xdata;
-  uint64_t *xsize;
-  uint64_t xdataindex;
-  uint64_t xsizeindex;
+struct Column {
+  double *data;
+  uint64_t *size;
+  uint64_t dataindex;
+  uint64_t sizeindex;
 };
 
-inline void XS_init(struct XS *xs, double *xdata, uint64_t *xsize, uint64_t xdataindex, uint64_t xsizeindex) {
-  xs->xdata = xdata;
-  xs->xsize = xsize;
-  xs->xdataindex = xdataindex;
-  xs->xsizeindex = xsizeindex;
+inline void Column_update(struct Column *to, struct Column *from) {
+  to->dataindex = from->dataindex;
+  to->sizeindex = from->sizeindex;
 }
 
-inline uint64_t XS_size(struct XS *xs) {
-  return xs->xsize[xs->xsizeindex];
+inline void XS_init(struct Column *xs, double *data, uint64_t *size, uint64_t dataindex, uint64_t sizeindex) {
+  xs->data = data;
+  xs->size = size;
+  xs->dataindex = dataindex;
+  xs->sizeindex = sizeindex;
 }
 
-inline double XS_get(struct XS *xs) {
-  return xs->xdata[xs->xdataindex];
+inline uint64_t XS_size(struct Column *xs) {
+  return xs->size[xs->sizeindex];
 }
 
-inline void XS_next(struct XS *xs) {
-  xs->xdataindex++;
+inline double XS_get(struct Column *xs) {
+  return xs->data[xs->dataindex];
 }
 
-struct XSS {
-  double *xdata;
-  uint64_t *xsize;
-  uint64_t xdataindex;
-  uint64_t xsizeindex;
-};
-
-inline void XSS_init(struct XSS *xss, double *xdata, uint64_t *xsize, uint64_t xdataindex, uint64_t xsizeindex) {
-  xss->xdata = xdata;
-  xss->xsize = xsize;
-  xss->xdataindex = xdataindex;
-  xss->xsizeindex = xsizeindex + 1;
+inline void XS_next(struct Column *xs) {
+  xs->dataindex++;
 }
 
-inline uint64_t XSS_size(struct XSS *xss) {
-  return xss->xsize[xss->xsizeindex - 1];
+inline void XSS_init(struct Column *xss, double *data, uint64_t *size, uint64_t dataindex, uint64_t sizeindex) {
+  xss->data = data;
+  xss->size = size;
+  xss->dataindex = dataindex;
+  xss->sizeindex = sizeindex + 1;
 }
 
-inline void XSS_getXS(struct XSS *xss, struct XS *xs) {
-  XS_init(xs, xss->xdata, xss->xsize, xss->xdataindex, xss->xsizeindex);
+inline uint64_t XSS_size(struct Column *xss) {
+  return xss->size[xss->sizeindex - 1];
 }
 
-inline void XSS_next(struct XSS *xss) {
-  struct XS xs;
+inline void XSS_getXS(struct Column *xss, struct Column *xs) {
+  XS_init(xs, xss->data, xss->size, xss->dataindex, xss->sizeindex);
+}
+
+inline void XSS_next(struct Column *xss) {
+  struct Column xs;
   XSS_getXS(xss, &xs);
-  uint64_t xsize0 = XS_size(&xs);
-  for (uint64_t i = 0;  i < xsize0;  ++i) {
+  uint64_t size0 = XS_size(&xs);
+  for (uint64_t i = 0;  i < size0;  ++i) {
     XS_next(&xs);
   }
-  xss->xdataindex = xs.xdataindex;
-  xss->xsizeindex = xs.xsizeindex;
-  xss->xsizeindex++;
+  Column_update(xss, &xs);
+  // xss->dataindex = xs.dataindex;
+  // xss->sizeindex = xs.sizeindex;
+  xss->sizeindex++;
 }
 
-struct YS {
-  double *ydata;
-  uint64_t *ysize;
-  uint64_t ydataindex;
-  uint64_t ysizeindex;
-};
-
-inline void YS_init(struct YS *ys, double *ydata, uint64_t *ysize, uint64_t ydataindex, uint64_t ysizeindex) {
-  ys->ydata = ydata;
-  ys->ysize = ysize;
-  ys->ydataindex = ydataindex;
-  ys->ysizeindex = ysizeindex;
+inline void YS_init(struct Column *ys, double *data, uint64_t *size, uint64_t dataindex, uint64_t sizeindex) {
+  ys->data = data;
+  ys->size = size;
+  ys->dataindex = dataindex;
+  ys->sizeindex = sizeindex;
 }
 
-inline uint64_t YS_size(struct YS *ys) {
-  return ys->ysize[ys->ysizeindex];
+inline uint64_t YS_size(struct Column *ys) {
+  return ys->size[ys->sizeindex];
 }
 
-inline double YS_get(struct YS *ys) {
-  return ys->ydata[ys->ydataindex];
+inline double YS_get(struct Column *ys) {
+  return ys->data[ys->dataindex];
 }
 
-inline void YS_next(struct YS *ys) {
-  ys->ydataindex++;
+inline void YS_next(struct Column *ys) {
+  ys->dataindex++;
 }
 
 struct Entry {
-  double *xdata;
-  uint64_t *xsize;
-  uint64_t xdataindex;
-  uint64_t xsizeindex;
-
-  double *ydata;
-  uint64_t ydataindex;
-  uint64_t *ysize;
-  uint64_t ysizeindex;
+  struct Column x;
+  struct Column y;
 };
 
 inline void Entry_init(struct Entry *entry, double *xdata, uint64_t *xsize, double *ydata, uint64_t *ysize) {
-  entry->xdata = xdata;
-  entry->xsize = xsize;
-  entry->xdataindex = 0;
-  entry->xsizeindex = 0;
-  entry->ydata = ydata;
-  entry->ysize = ysize;
-  entry->ydataindex = 0;
-  entry->ysizeindex = 0;
+  entry->x.data = xdata;
+  entry->x.size = xsize;
+  entry->x.dataindex = 0;
+  entry->x.sizeindex = 0;
+  entry->y.data = ydata;
+  entry->y.size = ysize;
+  entry->y.dataindex = 0;
+  entry->y.sizeindex = 0;
 }
 
-inline void Entry_getXSS(struct Entry *entry, struct XSS *xss) {
-  XSS_init(xss, entry->xdata, entry->xsize, entry->xdataindex, entry->xsizeindex);
+inline void Entry_getXSS(struct Entry *entry, struct Column *xss) {
+  XSS_init(xss, entry->x.data, entry->x.size, entry->x.dataindex, entry->x.sizeindex);
 }
 
-inline void Entry_getYS(struct Entry *entry, struct YS *ys) {
-  YS_init(ys, entry->ydata, entry->ysize, entry->ydataindex, entry->ysizeindex);
+inline void Entry_getYS(struct Entry *entry, struct Column *ys) {
+  YS_init(ys, entry->y.data, entry->y.size, entry->y.dataindex, entry->y.sizeindex);
 }
 
 inline void Entry_next(struct Entry *entry) {
-  struct XSS xss;
+  struct Column xss;
   Entry_getXSS(entry, &xss);
   uint64_t xsize0 = XSS_size(&xss);
   for (uint64_t i = 0;  i < xsize0;  ++i) {
     XSS_next(&xss);
   }
-  entry->xdataindex = xss.xdataindex;
-  entry->xsizeindex = xss.xsizeindex;
+  Column_update(&(entry->x), &xss);
+  // entry->x.dataindex = xss.dataindex;
+  // entry->x.sizeindex = xss.sizeindex;
 
-  struct YS ys;
+  struct Column ys;
   Entry_getYS(entry, &ys);
   uint64_t ysize0 = YS_size(&ys);
   for (uint64_t i = 0;  i < ysize0;  ++i) {
     YS_next(&ys);
   }
-  entry->ydataindex = ys.ydataindex;
-  entry->ysizeindex = ys.ysizeindex;
+  Column_update(&(entry->y), &ys);
+  // entry->y.dataindex = ys.dataindex;
+  // entry->y.sizeindex = ys.sizeindex;
 }
 
 double runnaive(double *xdata, uint64_t *xsize, double *ydata, uint64_t *ysize, uint64_t numEntries) {
   // struct Entry entry;
   // Entry_init(&entry, xdata, xsize, ydata, ysize);
   // for (uint64_t n = 0;  n < numEntries;  ++n) {
-  //   struct XSS xss;
+  //   struct Column xss;
   //   Entry_getXSS(&entry, &xss);
   //   uint64_t xsize0 = XSS_size(&xss);
   //   printf("[ ");
   //   for (uint64_t i = 0;  i < xsize0;  ++i) {
-  //     struct XS xs;
+  //     struct Column xs;
   //     XSS_getXS(&xss, &xs);
   //     uint64_t xsize1 = XS_size(&xs);
   //     printf("[ ");
@@ -162,7 +149,7 @@ double runnaive(double *xdata, uint64_t *xsize, double *ydata, uint64_t *ysize, 
   //   }
   //   printf("]\n");
 
-  //   struct YS ys;
+  //   struct Column ys;
   //   Entry_getYS(&entry, &ys);
   //   uint64_t ysize0 = YS_size(&ys);
   //   printf("[ ");
@@ -181,19 +168,19 @@ double runnaive(double *xdata, uint64_t *xsize, double *ydata, uint64_t *ysize, 
   for (uint64_t n = 0;  n < numEntries;  ++n) {
 
     // printf("[ ");
-    struct XSS xss;
+    struct Column xss;
     Entry_getXSS(&entry, &xss);
     uint64_t xss_size = XSS_size(&xss);
     for (uint64_t i = 0;  i < xss_size;  ++i) {
 
       // printf("[ ");
-      struct YS ys;
+      struct Column ys;
       Entry_getYS(&entry, &ys);
       uint64_t ys_size = YS_size(&ys);
       for (uint64_t j = 0;  j < ys_size;  ++j) {
 
         // printf("[ ");
-        struct XS xs;
+        struct Column xs;
         XSS_getXS(&xss, &xs);
         uint64_t xs_size = XS_size(&xs);
         for (uint64_t k = 0;  k < xs_size;  ++k) {

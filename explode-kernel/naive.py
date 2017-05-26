@@ -106,7 +106,18 @@ print naivelib.runnaive(
     bigxsize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
     bigydata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
     bigysize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
-    ctypes.c_uint64(2))   # 30 * multiplier
+    ctypes.c_uint64(30))
+
+for i in range(100):
+    startTime = time.time()
+    naivelib.runnaive(
+        bigxdata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        bigxsize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+        bigydata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+        bigysize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+        ctypes.c_uint64(30 * multiplier))
+    endTime = time.time()
+    print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
 
 import sys
 sys.exit(0)

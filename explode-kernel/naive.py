@@ -1,4 +1,3 @@
-from collections import namedtuple
 import time
 
 import numpy
@@ -96,43 +95,6 @@ for i in range(multiplier):
     bigxsize[i * len(xsize) : (i + 1) * len(xsize)] = xsize
     bigydata[i * len(ydata) : (i + 1) * len(ydata)] = ydata
     bigysize[i * len(ysize) : (i + 1) * len(ysize)] = ysize
-
-# @numba.jit(nopython=True)
-# def dummy1(n):
-#     out = 0
-#     for j in range(n):
-#         xss = []
-#         for i in range(10000):
-#             xss.append(i*i)
-#         for xi in xss:
-#             out += xi
-#     return out
-
-# @numba.jit(nopython=True)
-# def dummy2(n):
-#     out = 0
-#     for j in range(n):
-#         xss = [0] * 10000
-#         for i in range(10000):
-#             xss[i] = i*i
-#         for xi in xss:
-#             out += xi
-#     return out
-
-# def doit():
-#     dummy1(1000)
-#     dummy2(1000)
-#     startTime = time.time()
-#     dummy1(10000)
-#     endTime = time.time()
-#     print endTime - startTime
-#     startTime = time.time()
-#     dummy2(10000)
-#     endTime = time.time()
-#     print endTime - startTime
-
-# doit()
-
 
 @numba.jitclass([
     ("xdata", numba.float64[:]),
@@ -287,15 +249,6 @@ def entries(xdata, xsize, ydata, ysize, numEntries):
 def runnaive(xdata, xsize, ydata, ysize, numEntries):
     out = 0.0
     for entry in entries(xdata, xsize, ydata, ysize, numEntries):
-        # xss = entry.xss
-        # ys = entry.ys
-        # for i in range(xss.size):
-        #     xs = xss.get(i)
-        #     for j in range(ys.size):
-        #         y = ys.get(j)
-        #         for k in range(xs.size):
-        #             x = xs.get(k)
-        #             out += 100*x + y
         for xs in entry.xss.iterate:
             for y in entry.ys.iterate:
                 for x in xs.iterate:
@@ -306,75 +259,5 @@ for i in range(100):
     startTime = time.time()
     runnaive(bigxdata, bigxsize, bigydata, bigysize, 30 * multiplier)
     endTime = time.time()
-    print endTime - startTime
+    print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
 
-# @numba.jit(nopython=True)
-# def runnaive(xdata, xsize, ydata, ysize, numEntries):
-#     xsizeindex = 0
-#     ysizeindex = 0
-#     xdataindex = 0
-#     ydataindex = 0
-
-#     out = 0
-
-#     for entry in range(numEntries):
-#         xsize0 = xsize[xsizeindex]
-#         xsizeindex += 1
-#         xss = [[0]] * xsize0
-#         # for i in range(xsize0):
-#         #     xsize1 = xsize[xsizeindex]
-#         #     xsizeindex += 1
-#         #     xs = [0] * xsize1
-#         #     for j in range(xsize1):
-#         #         xs[j] = xdata[xdataindex]
-#         #         xdataindex += 1
-#         #     xss[i] = xs
-
-#         ysize0 = ysize[ysizeindex]
-#         ysizeindex += 1
-#         ys = [0] * ysize0
-#         for i in range(ysize0):
-#             ys[i] = ydata[ydataindex]
-#             ydataindex += 1
-
-#         # for xs in xss:
-#         #     for y in ys:
-#         #         for x in xs:
-#         #             out += 100*x + y
-
-#         for y in ys:
-#             out += y
-
-#     return out
-
-# print runnaive(bigxdata, bigxsize, bigydata, bigysize, 30 * multiplier)
-
-# for entry in entries(xdata, xsize, ydata, ysize, 2):
-#     # print "[",
-#     # for xs in entry.xss:
-#     #     print "[",
-#     #     for x in xs:
-#     #         print x,
-#     #     print "]",
-#     # print "]"
-#     # print "[",
-#     # for y in entry.ys:
-#     #     print y,
-#     # print "]"
-
-#     print "[",
-#     xss = entry.xss
-#     for i in range(len(xss)):
-#         xs = xss[i]
-#         print "[",
-#         for j in range(len(xs)):
-#             x = xs[j]
-#             print x,
-#         print "]",
-#     print "]"
-#     print "[",
-#     ys = entry.ys
-#     for i in range(len(ys)):
-#         y = ys[i]
-#         print y,
-#     print "]"

@@ -1,4 +1,4 @@
-from original import runme
+from nested import runme
 
 def testy(xdata, xsize, ydata, ysize, numEvents):
     outdata = [None] * 1000
@@ -145,5 +145,5 @@ for i in range(100):
     startTime = time.time()
     compiled(bigxdata, bigxsize, bigydata, bigysize, 30 * multiplier, bigoutdata, bigoutsize)
     endTime = time.time()
-    print endTime - startTime
+    print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
 

@@ -108,21 +108,19 @@ print naivelib.runnaive(
     bigysize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
     ctypes.c_uint64(30))
 
-for i in range(100):
-    startTime = time.time()
-    naivelib.runnaive(
-        bigxdata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-        bigxsize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
-        bigydata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
-        bigysize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
-        ctypes.c_uint64(30 * multiplier))
-    endTime = time.time()
-    print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
+# for i in range(100):
+#     startTime = time.time()
+#     naivelib.runnaive(
+#         bigxdata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+#         bigxsize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+#         bigydata.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
+#         bigysize.ctypes.data_as(ctypes.POINTER(ctypes.c_uint64)),
+#         ctypes.c_uint64(30 * multiplier))
+#     endTime = time.time()
+#     print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
 
-import sys
-sys.exit(0)
-
-
+# import sys
+# sys.exit(0)
 
 
 
@@ -133,11 +131,13 @@ sys.exit(0)
 
 
 
-@numba.jitclass([
-    ("xdata", numba.float64[:]),
-    ("xsize", numba.uint64[:]),
-    ("xsizeindex", numba.uint64),
-    ("xdataindex", numba.uint64)])
+
+
+# @numba.jitclass([
+#     ("xdata", numba.float64[:]),
+#     ("xsize", numba.uint64[:]),
+#     ("xsizeindex", numba.uint64),
+#     ("xdataindex", numba.uint64)])
 class XS(object):
     def __init__(self, xdata, xsize, xsizeindex, xdataindex):
         self.xdata = xdata
@@ -164,11 +164,11 @@ class XS(object):
             dataoffset += 1
         raise IndexError("ouch")
 
-@numba.jitclass([
-    ("xdata", numba.float64[:]),
-    ("xsize", numba.uint64[:]),
-    ("xsizeindex", numba.uint64),
-    ("xdataindex", numba.uint64)])
+# @numba.jitclass([
+#     ("xdata", numba.float64[:]),
+#     ("xsize", numba.uint64[:]),
+#     ("xsizeindex", numba.uint64),
+#     ("xdataindex", numba.uint64)])
 class XSS(object):
     def __init__(self, xdata, xsize, xsizeindex, xdataindex):
         self.xdata = xdata
@@ -201,11 +201,11 @@ class XSS(object):
                 dataoffset += 1
         raise IndexError("ouch")
 
-@numba.jitclass([
-    ("ydata", numba.float64[:]),
-    ("ysize", numba.uint64[:]),
-    ("ysizeindex", numba.uint64),
-    ("ydataindex", numba.uint64)])
+# @numba.jitclass([
+#     ("ydata", numba.float64[:]),
+#     ("ysize", numba.uint64[:]),
+#     ("ysizeindex", numba.uint64),
+#     ("ydataindex", numba.uint64)])
 class YS(object):
     def __init__(self, ydata, ysize, ysizeindex, ydataindex):
         self.ydata = ydata
@@ -232,15 +232,15 @@ class YS(object):
             dataoffset += 1
         raise IndexError("ouch")
 
-@numba.jitclass([
-    ("xdata", numba.float64[:]),
-    ("xsize", numba.uint64[:]),
-    ("ydata", numba.float64[:]),
-    ("ysize", numba.uint64[:]),
-    ("xsizeindex", numba.uint64),
-    ("xdataindex", numba.uint64),
-    ("ysizeindex", numba.uint64),
-    ("ydataindex", numba.uint64)])
+# @numba.jitclass([
+#     ("xdata", numba.float64[:]),
+#     ("xsize", numba.uint64[:]),
+#     ("ydata", numba.float64[:]),
+#     ("ysize", numba.uint64[:]),
+#     ("xsizeindex", numba.uint64),
+#     ("xdataindex", numba.uint64),
+#     ("ysizeindex", numba.uint64),
+#     ("ydataindex", numba.uint64)])
 class Entry(object):
     def __init__(self, xdata, xsize, ydata, ysize, xsizeindex, xdataindex, ysizeindex, ydataindex):
         self.xdata = xdata
@@ -260,7 +260,7 @@ class Entry(object):
     def ys(self):
         return YS(self.ydata, self.ysize, self.ysizeindex, self.ydataindex)
 
-@numba.jit(nopython=True)
+# @numba.jit(nopython=True)
 def entries(xdata, xsize, ydata, ysize, numEntries):
     xsizeindex = 0
     xdataindex = 0
@@ -282,18 +282,27 @@ def entries(xdata, xsize, ydata, ysize, numEntries):
         for i in range(ynest0):
             ydataindex += 1
 
-@numba.jit(nopython=True)
+# @numba.jit(nopython=True)
 def runnaive(xdata, xsize, ydata, ysize, numEntries):
     out = 0.0
     for entry in entries(xdata, xsize, ydata, ysize, numEntries):
+        print "[",
         for xs in entry.xss.iterate:
+            print "[",
             for y in entry.ys.iterate:
+                print "[",
                 for x in xs.iterate:
                     out += 100*x + y
+                    print 100*x + y,
+                print "]",
+            print "]",
+        print "]"
     return out
 
-for i in range(100):
-    startTime = time.time()
-    runnaive(bigxdata, bigxsize, bigydata, bigysize, 30 * multiplier)
-    endTime = time.time()
-    print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"
+runnaive(xdata, xsize, ydata, ysize, 30)
+
+# for i in range(100):
+#     startTime = time.time()
+#     runnaive(bigxdata, bigxsize, bigydata, bigysize, 30 * multiplier)
+#     endTime = time.time()
+#     print endTime - startTime, 1e-6 * 2400000 / (endTime - startTime), "MHz"

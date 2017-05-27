@@ -167,19 +167,19 @@ double runnaive(double *xdata, uint64_t *xsize, double *ydata, uint64_t *ysize, 
   Entry_init(&entry, xdata, xsize, ydata, ysize);
   for (uint64_t n = 0;  n < numEntries;  ++n) {
 
-    // printf("[ ");
+    printf("[ ");
     struct Column xss;
     Entry_getXSS(&entry, &xss);
     uint64_t xss_size = XSS_size(&xss);
     for (uint64_t i = 0;  i < xss_size;  ++i) {
 
-      // printf("[ ");
+      printf("[ ");
       struct Column ys;
       Entry_getYS(&entry, &ys);
       uint64_t ys_size = YS_size(&ys);
       for (uint64_t j = 0;  j < ys_size;  ++j) {
 
-        // printf("[ ");
+        printf("[ ");
         struct Column xs;
         XSS_getXS(&xss, &xs);
         uint64_t xs_size = XS_size(&xs);
@@ -189,22 +189,22 @@ double runnaive(double *xdata, uint64_t *xsize, double *ydata, uint64_t *ysize, 
           double y = YS_get(&ys);
           out += 100*x + y;
 
-          // printf("%g ", 100*x + y);
+          printf("%g ", 100*x + y);
 
           XS_next(&xs);
         }
-        // printf("] ");
+        printf("] ");
 
         YS_next(&ys);
       }
-      // printf("] ");
+      printf("] ");
 
       XSS_next(&xss);
     }
-    // printf("]");
+    printf("]");
 
     Entry_next(&entry);
-    // printf("\n");
+    printf("\n");
   }
   return out;
 }

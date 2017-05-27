@@ -1,11 +1,8 @@
-from collections import namedtuple
 import time
+import ctypes
 
 import numba
 import numpy
-
-Column = namedtuple("Column", ["data", "size", "dataindex", "sizeindex"])
-Entry = namedtuple("Entry", ["x", "y"])
 
 @numba.njit
 def Column_update(copyto, copyfrom):

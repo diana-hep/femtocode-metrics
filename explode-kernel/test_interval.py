@@ -44,6 +44,27 @@ def get_width(interval):
         return interval.hi - interval.lo
     return getter
 
+@numba.extending.overload_method(IntervalType, "wonky")
+def interval_wonky(interval, arg):
+    if isinstance(arg, numba.types.Float):
+        def wonky_impl(interval, arg):
+            return Interval(interval.lo - arg, interval.hi)
+        return wonky_impl
+
+@numba.extending.overload_method(IntervalType, "wonky2")
+def interval_wonky2(interval, arg):
+    if isinstance(arg, numba.types.Float):
+        def wonky2_impl(interval, arg):
+            interval.lo -= arg
+            return interval
+        return wonky2_impl
+
+@numba.extending.overload_method(IntervalType, "getiter")
+def interval_iter(interval):
+    def iter_impl(interval):
+        return [1, 2, 3]
+    return iter_impl
+
 @numba.extending.lower_builtin(Interval, numba.types.Float, numba.types.Float)
 def impl_interval(context, builder, sig, args):
     typ = sig.return_type
@@ -103,3 +124,27 @@ print doit4()
 def doit5(i):
     return i
 print doit5(Interval(4.4, 6.4))
+
+# @numba.njit
+# def doit6(i):
+#     i.lo = 1.1
+#     return i
+# print doit6(Interval(4.4, 6.4))
+
+@numba.njit
+def doit7(i):
+    return i.wonky(10.0)
+print doit7(Interval(4.4, 6.4))
+
+# @numba.njit
+# def doit8(i):
+#     return i.wonky2(10.0)
+# print doit8(Interval(4.4, 6.4))
+
+@numba.njit
+def doit8(interval):
+    out = 0
+    for j in interval:
+        out += j
+    return out
+print doit8(Interval(4.4, 16.4))

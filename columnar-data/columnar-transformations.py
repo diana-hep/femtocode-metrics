@@ -520,22 +520,75 @@ def fromflat(arrays, sch, name):
 
 ########################## repetition and definition levels (Parquet)
 
-# def newarrays(sch, name):
-#     def recurse(sch, name, defname, repname):
-#         if sch == {"boolean"} or sch == {"integer"} or sch == {"number"}:
-#             if defname
-#                 return {name: []}
-#             else:
-#                 return {name: [], sizename: []}
+def newarrays(sch, name):
+    # generate all projections separately and later coalesce them in tonumpy
+    if sch == {"boolean"} or sch == {"integer"} or sch == {"number"}:
+        return {name: [], name + "@def": [], name + "@rep": []}
 
-#         elif sch == {"string"}:
-#             return {name + "$": [], name: 
+    elif sch == {"string"}:
+        name = name + "$"
+        return {name: [], name + "@def": [], name + "@rep": []}
 
+    elif generic(sch) == "sequence":
+        return newarrays(param(sch), name + "[]")
 
+    elif generic(sch) == "record":
+        out = {}
+        for n, s in param(sch).items():
+            out.update(newarrays(s, name + "-" + n))
+        return out
 
+    else:
+        assert False, "schema is {}".format(sch)
 
+def toflat(obj, sch, arrays, name):
+    # separate pass over the data for each projection; not efficient, but illustrative
+    for projection in arrays:
+        if projection.startswith(name) and not projection.endswith("@def") and not projection.endswith("@rep"):
+            dataarray = arrays[projection]
+            defarray = arrays[projection + "@def"]
+            reparray = arrays[projection + "@rep"]
 
+            # def undefined(sch, deflevel, repstart, repcont):
+            #     if sch == {"number"}:
+            #         defarray.append(deflevel)
+            #         reparray.append(replevel)
+            #     elif generic(sch) == "sequence":
+            #         undefined(param(sch), deflevel, replevel)
 
+            def defined(obj, sch, deflevel, first, replevel, rep):
+                print("defined", sch, deflevel, first, replevel, rep)
+
+                if not first:
+                    replevel = rep
+
+                if sch == {"number"}:
+                    dataarray.append(obj)
+                    defarray.append(deflevel)
+                    reparray.append(replevel)
+
+                elif generic(sch) == "sequence":
+                    first = True
+                    for x in obj:
+                        defined(x, param(sch), deflevel + 1, first, replevel, rep + 1)
+                        first = False
+
+            if obj is None:
+                undefined(sch, 0, 0)
+            else:
+                defined(obj, sch, 0, False, 0, 0)
+
+obj = [[[1.1, 2.2, 3.3], [1.1, 2.2, 3.3, 4.4]], [[99.9], [3.14, 2.71]]]
+print(obj)
+name = "x"
+sch = schema(obj)
+arrays = newarrays(sch, name)
+toflat(obj, sch, arrays, name)
+for key in sorted(arrays):
+    print(key, arrays[key])
+
+import sys
+sys.exit(0)
 
 ########################## tests
 

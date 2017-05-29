@@ -12,14 +12,14 @@ import numpy
 # def useiterator(numEntries):
 #     out = 0
 #     for n in iterator(numEntries):
-#         out += 1
+#         out += n
 #     return out
 
 # @numba.njit
 # def useloop(numEntries):
 #     out = 0
 #     for n in range(numEntries):
-#         out += 1
+#         out += n
 #     return out
 
 # def test1(numEntries):

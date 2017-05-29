@@ -36,7 +36,31 @@ class IntervalModel(numba.extending.models.StructModel):
         super(IntervalModel, self).__init__(dmm, fe_type, members)
 
 numba.extending.make_attribute_wrapper(IntervalType, "lo", "lo")
-numba.extending.make_attribute_wrapper(IntervalType, "hi", "hi")
+# numba.extending.make_attribute_wrapper(IntervalType, "hi", "hi")
+
+@numba.extending.infer_getattr
+class StructAttribute(numba.typing.templates.AttributeTemplate):
+    key = IntervalType
+    def generic_resolve(self, typ, attr):
+        if attr == "hi":
+            return numba.types.float64
+
+@numba.extending.lower_getattr(IntervalType, "hi")
+def struct_getattr_impl(context, builder, typ, val):
+    val = numba.cgutils.create_struct_proxy(typ)(context, builder, value=val)
+    return numba.targets.imputils.impl_ret_borrowed(context, builder, numba.types.float64, val.hi)
+
+@numba.extending.lower_setattr(IntervalType, "hi")
+def struct_setattr_impl(context, builder, sig, args):
+    assert isinstance(sig.args[0], IntervalType)
+    assert isinstance(sig.args[1], numba.types.Float)
+    interval, newvalue = args
+    val = numba.cgutils.create_struct_proxy(sig.args[0])(context, builder, value=interval)
+    ptr = val._get_ptr_by_name("hi")
+    return builder.store(newvalue, ptr)
+
+
+
 
 @numba.extending.overload_attribute(IntervalType, "width")
 def get_width(interval):
@@ -73,6 +97,14 @@ def impl_interval(context, builder, sig, args):
     interval.lo = lo
     interval.hi = hi
     return interval._getvalue()
+
+def changelo(interval):
+    interval.lo = interval.lo - 10
+
+@numba.extending.lower_builtin(changelo, Interval)
+def impl_changelo(context, builder, sig, args):
+    interval, = args
+    interval.lo = interval.lo - 10
 
 @numba.extending.unbox(IntervalType)
 def unbox_interval(typ, obj, c):
@@ -125,11 +157,11 @@ def doit5(i):
     return i
 print doit5(Interval(4.4, 6.4))
 
-# @numba.njit
-# def doit6(i):
-#     i.lo = 1.1
-#     return i
-# print doit6(Interval(4.4, 6.4))
+@numba.njit
+def doit6(i):
+    i.hi = 99.999
+    return i.width
+print doit6(Interval(4.4, 6.4))
 
 @numba.njit
 def doit7(i):
@@ -141,10 +173,59 @@ print doit7(Interval(4.4, 6.4))
 #     return i.wonky2(10.0)
 # print doit8(Interval(4.4, 6.4))
 
+# @numba.njit
+# def doit8(interval):
+#     out = 0
+#     for j in interval:
+#         out += j
+#     return out
+# print doit8(Interval(4.4, 16.4))
+
+# print "HERE"
+# @numba.njit
+# def doit9(i):
+#     changelo(i)
+#     return i
+# print doit9(Interval(4.4, 6.4))
+
+print
+print "DOIT10"
+
 @numba.njit
-def doit8(interval):
-    out = 0
-    for j in interval:
-        out += j
-    return out
-print doit8(Interval(4.4, 16.4))
+def doit10():
+    interval = Interval(4.4, 6.4)
+    interval.hi = 99.999
+    return interval.width
+print doit10()
+
+# cres = doit10.overloads.values()[0]
+# print cres.library.get_llvm_str()
+
+
+
+
+# define i32 @"__main__.doit10$10."(double* noalias nocapture %retptr, { i8*, i32 }** noalias nocapture %excinfo, i8* noalias nocapture readnone %env) {
+# entry:
+#   %.51 = alloca double, align 8
+#   %excinfo.1 = alloca { i8*, i32 }*, align 8
+#   store double 0.000000e+00, double* %.51, align 8
+#   %.53 = call i32 @"__main__.getter$2.Interval"(double* nonnull %.51, { i8*, i32 }** nonnull %excinfo.1, i8* null, double 4.400000e+00, double 6.400000e+00)
+#   switch i32 %.53, label %B0.if [
+#     i32 -2, label %B0.endif
+#     i32 0, label %B0.endif
+#   ] 
+
+# B0.if:                                            ; preds = %entry
+#   %0 = bitcast { i8*, i32 }** %excinfo.1 to i64*
+#   %.541 = load i64, i64* %0, align 8
+#   %1 = bitcast { i8*, i32 }** %excinfo to i64*
+#   store i64 %.541, i64* %1, align 8
+#   ret i32 %.53
+
+# B0.endif:                                         ; preds = %entry, %entry
+#   %2 = bitcast double* %.51 to i64*
+#   %.632 = load i64, i64* %2, align 8
+#   %3 = bitcast double* %retptr to i64*
+#   store i64 %.632, i64* %3, align 8
+#   ret i32 0
+# } 

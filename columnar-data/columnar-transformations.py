@@ -549,16 +549,18 @@ def toflat(obj, sch, arrays, name):
             defarray = arrays[projection + "@def"]
             reparray = arrays[projection + "@rep"]
 
-            # def undefined(sch, deflevel, repstart, repcont):
-            #     if sch == {"number"}:
-            #         defarray.append(deflevel)
-            #         reparray.append(replevel)
-            #     elif generic(sch) == "sequence":
-            #         undefined(param(sch), deflevel, replevel)
+            def undefined(sch, deflevel, first, replevel, rep):
+                if not first:
+                    replevel = rep
+
+                if sch == {"number"}:
+                    defarray.append(deflevel)
+                    reparray.append(replevel)
+
+                elif generic(sch) == "sequence":
+                    undefined(param(sch), deflevel, first, replevel, rep)
 
             def defined(obj, sch, deflevel, first, replevel, rep):
-                print("defined", sch, deflevel, first, replevel, rep)
-
                 if not first:
                     replevel = rep
 
@@ -568,20 +570,27 @@ def toflat(obj, sch, arrays, name):
                     reparray.append(replevel)
 
                 elif generic(sch) == "sequence":
-                    first = True
-                    for x in obj:
-                        defined(x, param(sch), deflevel + 1, first, replevel, rep + 1)
-                        first = False
+                    if len(obj) == 0:
+                        undefined(param(sch), deflevel, True, replevel, None)
+                    else:
+                        first = True
+                        for x in obj:
+                            if x is None:
+                                undefined(param(sch), deflevel, first, replevel, rep + 1)
+                            else:
+                                defined(x, param(sch), deflevel + 1, first, replevel, rep + 1)
+                            first = False
 
             if obj is None:
                 undefined(sch, 0, 0)
             else:
                 defined(obj, sch, 0, False, 0, 0)
 
-obj = [[[1.1, 2.2, 3.3], [1.1, 2.2, 3.3, 4.4]], [[99.9], [3.14, 2.71]]]
+obj = [[[1.1, 2.2, 3.3], None], [[99.9], [3.14, 2.71]]]
 print(obj)
 name = "x"
 sch = schema(obj)
+print(sch)
 arrays = newarrays(sch, name)
 toflat(obj, sch, arrays, name)
 for key in sorted(arrays):

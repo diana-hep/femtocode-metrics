@@ -447,7 +447,10 @@ def fromflat(arrays, sch, name):
     Returns
       Python object made of numbers, booleans, lists, and dicts
     """
-    def recurse(arrays, sch, name, indexes):
+
+    indexes = {n: 0 for n in arrays if n.startswith(name)}
+
+    def recurse(sch, name):
         if sch == {"boolean"}:
             value = arrays[name][indexes[name]]
             indexes[name] += 1
@@ -508,20 +511,20 @@ def fromflat(arrays, sch, name):
             if length == -1:
                 return None
             else:
-                return [recurse(arrays, param(sch), name + "[]", indexes) for i in range(length)]
+                return [recurse(param(sch), name + "[]") for i in range(length)]
 
         elif generic(sch) == "record":
-            return {n: recurse(arrays, s, name + "-" + n, indexes) for n, s in param(sch).items()}
+            return {n: recurse(s, name + "-" + n) for n, s in param(sch).items()}
 
         else:
             assert False, "schema is {}".format(sch)
 
-    return recurse(arrays, sch, name, {n: 0 for n in arrays})
+    return recurse(sch, name)
 
 ########################## repetition and definition levels (Parquet)
 
 def newarrays(sch, name):
-    # generate all projections separately and later coalesce them in tonumpy
+    # definition levels must be different for each column, but repetition levels may be shared (coalesced when saving)
     if sch == {"boolean"} or sch == {"integer"} or sch == {"number"}:
         return {name: [], name + "@def": [], name + "@rep": []}
 
@@ -540,6 +543,38 @@ def newarrays(sch, name):
 
     else:
         assert False, "schema is {}".format(sch)
+
+# def makewriters(sch, name):
+#     class Writer(object):
+#         def __init__(self, name, depth):
+#             self.name = name
+#             self.depth = depth
+#             self.children = []
+
+#     def recurse(sch, name, depth):
+#         if sch == {"number"}:
+#             return Writer(name, depth)
+
+#         elif generic(sch) == "sequence":
+#             out = Writer(name, depth)
+#             out.children.append(recurse(param(sch), name + "[]", depth + 1))
+#             return out
+
+#         elif generic(sch) == "record":
+#             out = Writer(name, depth)
+#             for n, s in param(sch).items():
+#                 out.children.append(recurse(s, name + "-" + n, depth + 1))
+#             return out
+
+#     return recurse(sch, name, 0)
+
+# def toflat(obj, sch, arrays, name):
+#     writer = makewriters(sch, name)
+
+    
+
+
+
 
 def toflat(obj, sch, arrays, name):
     # separate pass over the data for each projection; not efficient, but illustrative
@@ -572,21 +607,42 @@ def toflat(obj, sch, arrays, name):
                 elif generic(sch) == "sequence":
                     if len(obj) == 0:
                         undefined(param(sch), deflevel, True, replevel, None)
-                    else:
-                        first = True
-                        for x in obj:
-                            if x is None:
-                                undefined(param(sch), deflevel, first, replevel, rep + 1)
-                            else:
-                                defined(x, param(sch), deflevel + 1, first, replevel, rep + 1)
-                            first = False
+                    first = True
+                    for x in obj:
+                        if x is None:
+                            undefined(param(sch), deflevel, first, replevel, rep + 1)
+                        else:
+                            defined(x, param(sch), deflevel + 1, first, replevel, rep + 1)
+                        first = False
 
             if obj is None:
                 undefined(sch, 0, 0)
             else:
                 defined(obj, sch, 0, False, 0, 0)
 
-obj = [[[1.1, 2.2, 3.3], None], [[99.9], [3.14, 2.71]]]
+def fromflat(arrays, sch, name):
+    indexes = {n: 0 for n in arrays if n.startswith(name)}
+
+    def recurse(sch, name, depth, build):
+        if sch == {"number"}:
+
+        elif generic(sch) == "sequence":
+            name = name + "[]"
+            replevel = arrays[name + "@ref"][indexes[name + "@ref"]]
+            indexes[name + "@ref"] += 1
+
+            if replevel == depth:
+                build = []
+
+            
+
+
+
+
+
+
+
+obj = [[1.1, 2.2, 3.3], [99.9]]
 print(obj)
 name = "x"
 sch = schema(obj)

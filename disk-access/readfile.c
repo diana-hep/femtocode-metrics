@@ -8,7 +8,7 @@ int main(int argc, char** argv) {
   double out = 0.0;
   double buffer[CHUNK];
 
-  FILE *f = fopen(argv[1], "r");   // "/mnt/sdb-instancestore/big-file.raw"
+  FILE *f = fopen("/mnt/sdb-instancestore/big-file.raw", "r");
   int fd = fileno(f);
 
   uint64_t i;

@@ -1,0 +1,12 @@
+time python read_mmap.py
+Traceback (most recent call last):
+  File "read_mmap.py", line 6, in <module>
+    fp = numpy.memmap("/mnt/sdb-instancestore/big-file.raw", dtype="float64", mode="r", shape=(40L*1024L*1024L*1024L/8L,))
+  File "/home/ec2-user/miniconda2/lib/python2.7/site-packages/numpy/core/memmap.py", line 264, in __new__
+    mm = mmap.mmap(fid.fileno(), bytes, access=acc, offset=start)
+mmap.error: [Errno 12] Cannot allocate memory
+
+real	0m0.767s
+user	0m0.188s
+sys	0m0.044s
+time python read_plain.py

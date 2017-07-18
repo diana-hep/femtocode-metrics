@@ -1,0 +1,54 @@
+time python read_mmap.py
+out: -2684354560.0 time: 110.507570028
+
+real	1m51.375s
+user	0m1.708s
+sys	0m14.968s
+time python read_plain.py
+out: -2684354560.0 time: 94.4251890182
+
+real	1m34.698s
+user	0m23.220s
+sys	0m10.836s
+time ./readfile
+out: -2.68435e+09
+
+real	1m34.969s
+user	0m20.644s
+sys	0m11.112s
+time python read_mmap.py
+out: -2684354560.0 time: 113.884384155
+
+real	1m54.782s
+user	0m1.504s
+sys	0m15.408s
+time python read_plain.py
+out: -2684354560.0 time: 94.6627709866
+
+real	1m34.911s
+user	0m18.816s
+sys	0m14.888s
+time ./readfile
+out: -2.68435e+09
+
+real	1m37.370s
+user	0m22.108s
+sys	0m9.672s
+time python read_mmap.py
+out: -2684354560.0 time: 118.220082045
+
+real	1m59.147s
+user	0m2.512s
+sys	0m14.236s
+time python read_plain.py
+out: -2684354560.0 time: 94.3603889942
+
+real	1m34.572s
+user	0m19.896s
+sys	0m13.984s
+time ./readfile
+out: -2.68435e+09
+
+real	1m35.413s
+user	0m18.032s
+sys	0m13.800s

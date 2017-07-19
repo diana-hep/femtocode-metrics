@@ -20,3 +20,15 @@ out = doit()
 endTime = time.time()
 
 print "out:", out, "time:", endTime - startTime
+
+# 40 GB: 114.687829018
+# 100 GB: 287.973561049 seconds
+# factor of 2.51093392834041 (100/40)
+
+# 356 MB/sec
+
+# 25% slower than read-and-drop, but get the added benefit of keeping whole columns in RAM
+
+# ulimits don't seem to affect it
+
+
